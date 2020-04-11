@@ -9,13 +9,11 @@ import CoursePageComponent from "../../components/CoursePage/CoursePageComponent
 import {combineReducers, createStore} from "redux";
 import coursesReducer from "../../reducers/courseReducer";
 import {Provider} from "react-redux";
+import topicsReducer from "../../reducers/topicReducer";
+import discussionReducer from "../../reducers/discussionReducer";
+import instructorReducer from "../../reducers/instructorReducer";
 
 
-const courseManagerReducer = combineReducers({
-    courses: coursesReducer
-})
-
-const courseManagerStore = createStore(courseManagerReducer);
 
 class CourseManagerContainer extends React.Component {
 
@@ -55,7 +53,6 @@ class CourseManagerContainer extends React.Component {
     render() {
         return(
             <React.Fragment>
-                <Provider store={courseManagerStore}>
                 <CourseNavComponent
                     addCourse = {this.addCourse}
                     updateForm = {this.updateForm}/>
@@ -80,7 +77,6 @@ class CourseManagerContainer extends React.Component {
                                courses={this.state.courses}
                            />
                        }/>
-                </Provider>
             </React.Fragment>
         )
     }

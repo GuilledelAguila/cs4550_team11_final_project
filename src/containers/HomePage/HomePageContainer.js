@@ -9,11 +9,28 @@ import CourseManagerContainer from "../CourseManager/CourseManagerContainer";
 import ConfirmEmailComponent from "../../components/SignUp/ConfirmEmailComponent";
 import CoursePageComponent from "../../components/CoursePage/CoursePageComponent";
 import HomePageComponent from "../../components/HomePageComponent";
+import {combineReducers, createStore} from "redux";
+import coursesReducer from "../../reducers/courseReducer";
+import topicsReducer from "../../reducers/topicReducer";
+import discussionReducer from "../../reducers/discussionReducer";
+import instructorReducer from "../../reducers/instructorReducer";
+import {Provider} from "react-redux";
+
+
+const rootReducer = combineReducers({
+    courses: coursesReducer,
+    topics: topicsReducer,
+    discussions: discussionReducer,
+    instructor: instructorReducer
+})
+
+const store = createStore(rootReducer);
 
 class HomePageContainer extends React.Component {
 
     render() {
         return(
+            <Provider store={store}>
             <Router>
                 <Route path="/"
                        exact={true}
@@ -88,8 +105,8 @@ class HomePageContainer extends React.Component {
                            />
                        }/>
 
-
             </Router>
+            </Provider>
         )
     }
 

@@ -14,7 +14,7 @@ class InstructorComponent extends React.Component{
         return(
             <div className="container-fluid instructor text-left">
                 <div className="row space-left">
-                    <h1 className="white">IS4300: Human Computer Interaction</h1>
+                    <h1 className="white">{this.props.courseId} Human Computer Interaction</h1>
                 </div>
                 <div className="row space-bottom space-left">
                     <div className="col-3 ">
