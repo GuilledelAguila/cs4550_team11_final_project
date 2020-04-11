@@ -1,3 +1,5 @@
+import {FIND_ALL_TOPICS} from "../actions/topicActions";
+
 const topics = [
     {id: "0", title: "Grading"},
     {id: "1", title: "Work Load"},
@@ -13,22 +15,8 @@ const topicReducer = (
             return {
                 topics: state.topics.map(topic => topic.id === action.topic.id ? action.topic : topic)
             }
-        case "DELETE_WIDGET":
-            return {
-                widgets: state.widgets.filter(widget => widget.id !== action.widgetId)
-            }
-        case "CREATE_WIDGET":
-            return {
-                widgets: [
-                    ...state.widgets,
-                    action.widget
-                ]
-            }
-        case "FIND_ALL_WIDGETS_FOR_TOPIC":
-            return {
-                widgets: action.widgets
-            }
-        case "FIND_ALL_TOPICS":
+
+        case FIND_ALL_TOPICS:
             return {
                 topics: [...state.topics]
             }

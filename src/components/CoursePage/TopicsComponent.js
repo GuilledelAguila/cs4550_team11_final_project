@@ -1,10 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import {findAllTopics} from "../../actions/topicActions";
 class  TopicsComponent extends React.Component {
 
     componentDidMount() {
-        //this.props.findAllTopics()
+        this.props.findAllTopics()
     }
 
     render() {
@@ -41,10 +42,7 @@ const dispatchToPropertyMapper = (dispatch) => {
     return {
 
         findAllTopics: () =>
-            dispatch({
-                type: 'FIND_ALL_TOPICS'
-            })
-
+            dispatch(findAllTopics())
 
     }
 }
