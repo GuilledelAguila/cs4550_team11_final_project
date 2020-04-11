@@ -2,6 +2,7 @@ import React from "react";
 
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import {addComment, cancelComment, saveComment, updateDiscussion} from "../../actions/discussionActions";
 
 class ConversationsComponent extends React.Component{
 
@@ -24,7 +25,7 @@ class ConversationsComponent extends React.Component{
                                     this.setState(prevState => ({
                                         topic: this.props.topicId
                                     }))
-                                    this.props.addingComment(this.props.topicId)
+                                    this.props.addingComment()
                                 }}
                         >Add Comment</button>
                     </text>
@@ -101,26 +102,17 @@ const stateToPropertyMapper = (state) => {
 const dispatchToPropertyMapper = (dispatch) => {
     return {
 
-        updateDiscussions: (topicId) =>
-            dispatch({
-                type: 'UPDATE_DISCUSSIONS',
-                topicId: topicId
-            }),
-        addingComment: (topicId) => {
-            dispatch({
-                type: 'ADDING_COMMENT',
-            })
+        updateDiscussions: (topicId, discussion) =>
+            dispatch(updateDiscussion(topicId, discussion)),
+
+        addingComment: () => {
+            dispatch(addComment())
         },
         saveComment: (discussion) => {
-            dispatch({
-                type: 'SAVE_COMMENT',
-                discussion: discussion
-            })
+            dispatch(saveComment(discussion))
         },
         cancelComment: () => {
-            dispatch({
-                type: 'CANCEL_COMMENT'
-            })
+            dispatch(cancelComment())
         }
 
 
