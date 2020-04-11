@@ -15,10 +15,11 @@ export default class SignUpComponent extends React.Component{
 
     register = (user) => {
         if (this.state.verifyPassword === this.state.password){
-            register(user).then(user => console.log(user))
-            this.props.history.push("/login")
+            register(user)
+                .then(user => console.log(user))
+            this.props.history.push("/course-manager")
         } else {
-            alert("Password don't match")
+            alert("Passwords don't match")
         }
 
     }
