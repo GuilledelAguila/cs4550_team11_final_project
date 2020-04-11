@@ -9,6 +9,7 @@ import SignUpProfessorComponent from "../../components/SignUp/SignUpProfessorCom
 import CourseManagerContainer from "../CourseManager/CourseManagerContainer";
 import ConfirmEmailComponent from "../../components/SignUp/ConfirmEmailComponent";
 import CoursePageComponent from "../../components/CoursePage/CoursePageComponent";
+import HomePageComponent from "../../components/HomePageComponent";
 
 class HomePageContainer extends React.Component {
 
@@ -17,68 +18,48 @@ class HomePageContainer extends React.Component {
             <Router>
                 <Route path="/"
                        exact={true}
-                       render={() =>
-                           <div>
-                           <nav className="navbar navbar-expand-lg bg-light">
-                               <a className="navbar-brand" href="#">Husky-Info</a>
-                               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                                   <span className="navbar-toggler-icon"></span>
-                               </button>
-                               <div className="collapse navbar-collapse" id="navbarText">
-                                   <ul className="navbar-nav mr-auto">
-                                       <li className="nav-item">
-                                           <a className="nav-link" href="#">Home</a>
-                                       </li>
-                                       <li className="nav-item">
-                                           <a className="nav-link" href="#">About</a>
-                                       </li>
-                                       <li className="nav-item">
-                                           <a className="nav-link" href="#">Help</a>
-                                       </li>
-                                   </ul>
-                                   <span className="navbar-text">
-                           <Link to="/login">
-                               <button className="btn btn-outline-danger nav-item float-right" type="button">Log In</button>
-                           </Link>
-                           <Link to="/signup">
-                               <button className="btn btn-outline-danger" type="button">Sign Up
-                           </button>
-                           </Link>
-                           </span>
-                               </div>
-                           </nav>
-                               <div className="hv-100 justify-content-center align-items-center">
-                                   <h1>Welcome to Husky-Info</h1>
-                               </div>
-
-                           </div>
+                       render={(props) =>
+                            <HomePageComponent
+                                {...props}
+                            />
                        }/>
 
                 <Route path="/login"
                        exact={true}
-                       render={() =>
-                           <LogInComponent/>
+                       render={(props) =>
+                           <LogInComponent
+                               {...props}
+                           />
                        }/>
                 <Route path="/signup"
                        exact={true}
-                       render={() =>
-                           <StudentOrProfessorComponent/>
+                       render={(props) =>
+                           <StudentOrProfessorComponent
+                               {...props}
+                           />
                        }/>
                 <Route path="/signup/professor"
                        exact={true}
-                       render={() =>
-                           <SignUpProfessorComponent/>
+                       render={(props) =>
+                           <SignUpProfessorComponent
+                               {...props}
+                           />
                        }/>
                 <Route path="/signup/form"
                        exact={true}
-                       render={() =>
-                           <SignUpComponent/>
-                       }/>
+                       render={(props) =>
+                            <SignUpComponent
+                                {...props}
+                            />
+                       }
+                       />
 
                 <Route path="/signup/confirmemail"
                        exact={true}
-                       render={() =>
-                           <ConfirmEmailComponent/>
+                       render={(props) =>
+                           <ConfirmEmailComponent
+                               {...props}
+                           />
                        }/>
 
                 <Route path={["/course-manager",
@@ -87,8 +68,10 @@ class HomePageContainer extends React.Component {
                     "/course-manager/table/panel",
                     "/course-manager/grid/panel"]}
                        exact={true}
-                       render={() =>
-                           <CourseManagerContainer/>
+                       render={(props) =>
+                           <CourseManagerContainer
+                               {...props}
+                           />
                        }/>
                 <Route path="/course-manager/course/:courseId"
                        exact={true}
