@@ -7,13 +7,22 @@ import CourseTableHeaderComponent from "../../components/TableHeader/CourseTable
 import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 import CoursePanelComponent from "../../components/CoursePanelComponent";
 import CoursePageComponent from "../../components/CoursePage/CoursePageComponent";
+import {combineReducers, createStore} from "redux";
+import coursesReducer from "../../reducers/courseReducer";
+import {Provider} from "react-redux";
+
+
+const courseManagerReducer = combineReducers({
+    courses: coursesReducer
+})
+
+const courseManagerStore = createStore(courseManagerReducer);
 
 class CourseManagerContainer extends React.Component {
 
     state = {
         layout: 'table',
         newCourseTitle: "New Course Title",
-        courses: [],
         selectedRow: -1,
         editingRow: -1,
         showEditorCourse: {}
@@ -121,6 +130,7 @@ class CourseManagerContainer extends React.Component {
     render() {
         return(
             <React.Fragment>
+                <Provider store={courseManagerStore}>
                 <CourseNavComponent
                     addCourse = {this.addCourse}
                     updateForm = {this.updateForm}/>
@@ -136,7 +146,6 @@ class CourseManagerContainer extends React.Component {
                            exact={true}
                            render={() =>
                                <CourseTableComponent
-                                   courses={this.state.courses}
                                    deleteCourse={this.deleteCourse}
                                    activeRow={this.state.selectedRow}
                                    editingRow={this.state.editingRow}
@@ -165,6 +174,7 @@ class CourseManagerContainer extends React.Component {
                                courses={this.state.courses}
                            />
                        }/>
+                </Provider>
             </React.Fragment>
         )
     }

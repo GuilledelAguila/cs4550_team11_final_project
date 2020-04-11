@@ -1,4 +1,4 @@
-import {FIND_ALL_TOPICS} from "../actions/topicActions";
+import {FIND_ALL_TOPICS, UPDATE_TOPIC} from "../actions/topicActions";
 
 const topics = [
     {id: "0", title: "Grading"},
@@ -11,7 +11,7 @@ const topics = [
 const topicReducer = (
     state = {topics: topics}, action) => {
     switch (action.type) {
-        case "UPDATE_WIDGET":
+        case UPDATE_TOPIC:
             return {
                 topics: state.topics.map(topic => topic.id === action.topic.id ? action.topic : topic)
             }

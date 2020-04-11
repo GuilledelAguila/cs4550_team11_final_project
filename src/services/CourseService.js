@@ -14,10 +14,11 @@ export const createCourse = (course) =>
 
 /*
 findAllCourses() -> retrieves all course instances as an array of courses */
-export const findAllCourses = async () => {
-    const response = await fetch(`http://localhost:8080/api/courses`)
-    return await response.json()
+export const findAllCourses = () => {
+    return fetch(`http://localhost:8080/api/courses`)
+        .then(response =>response.json())
 }
+
 
 /* findCourseById(id) -> retrieves a course instance that matches the id parameter*/
 export const findCourseById = async (courseId) => {
@@ -50,5 +51,6 @@ export const deleteCourse = async (courseId) =>
 
 
 export default {
+    findAllCourses,
     findCourseById
 }
