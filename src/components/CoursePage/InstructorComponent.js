@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import "./CoursePage.style.client.css"
 import icon from "./default-icon.jpg"
+import {editBriefDescription, updateBriefDescription} from "../../actions/instructorActions";
 
 class InstructorComponent extends React.Component{
 
@@ -80,15 +81,10 @@ const dispatchToPropertyMapper = (dispatch) => {
     return {
 
         editBriefDescription: () =>
-            dispatch({
-                type: 'EDIT_BRIEF_DESCRIPTION'
-            }),
+            dispatch(editBriefDescription()),
 
         saveBriefDescription: (newDescription) =>
-            dispatch ({
-                type: 'SAVE_BRIEF_DESCRIPTION',
-                newDescription: newDescription
-            })
+            dispatch (updateBriefDescription(newDescription))
 
     }
 }

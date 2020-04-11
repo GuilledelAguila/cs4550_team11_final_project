@@ -4,9 +4,9 @@ import {Link} from "react-router-dom";
 const CourseRowUnselectedComponent  = ({index, course, selectRow}) =>
     <React.Fragment>
         <td onClick={() => selectRow(index)}>
-            <Link data-tip="Click to select row" className="black"to={`/course-manager/course/${course._id}`}>
+            <Link data-tip="Click to select row" className="black"to={`/course-manager/course/${course.id}`}>
                 <i className="fas fa-file-alt wbdv-row wbdv-icon"></i>
-                <label className="courseTitle">{course.title}</label>
+                <label className="courseTitle">{course.name}</label>
             </Link>
         </td>
         <td className="collapsable wbdv-row wbdv-owner owned-collapse">me</td>
