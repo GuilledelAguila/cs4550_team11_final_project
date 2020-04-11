@@ -2,7 +2,7 @@ import React from "react";
 import "./SignUp.style.client.css"
 import {Link} from "react-router-dom";
 
-const StudentOrProfessorComponent = () =>
+const StudentOrProfessorComponent = (props) =>
         <React.Fragment>
             <div className="signup-page">
             <div className="container-signup">

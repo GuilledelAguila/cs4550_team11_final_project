@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import React from "react";
 
-const HomePageComponent = () =>
+const HomePageComponent = (props) =>
     <div>
         <nav className="navbar navbar-expand-lg bg-light">
             <a className="navbar-brand" href="#">Husky-Info</a>

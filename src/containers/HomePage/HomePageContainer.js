@@ -26,8 +26,11 @@ class HomePageContainer extends React.Component {
 
                 <Route path="/login"
                        exact={true}
-                       component={LogInComponent}
-                />
+                       render={(props) =>
+                           <LogInComponent
+                               {...props}
+                           />
+                       }/>
                 <Route path="/signup"
                        exact={true}
                        render={(props) =>
