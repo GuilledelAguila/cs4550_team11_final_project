@@ -16,16 +16,11 @@ class CourseTableComponent extends React.Component {
             <React.Fragment>
                 <tbody>
                 {
-                    this.props.topic && this.props.courses.map(function(course, index){
+                    this.props.courses && this.props.courses.map(function(course, index){
                         return (
                             <CourseRowComponent
                                 course={course}
                                 index={index}
-                                deleteCourse={this.props.deleteCourse}
-                                activeRow={this.props.activeRow}
-                                editingRow={this.props.editingRow}
-                                selectRow = {this.props.selectRow}
-                                editRow = {this.props.editRow}
                             />
                         )
                     })
@@ -39,7 +34,7 @@ class CourseTableComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
-        courses: state.courses
+        courses: state.courses.courses
     }
 }
 

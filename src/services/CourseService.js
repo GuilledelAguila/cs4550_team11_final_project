@@ -22,8 +22,17 @@ export const findAllCourses = () => {
 
 /* findCourseById(id) -> retrieves a course instance that matches the id parameter*/
 export const findCourseById = async (courseId) => {
-    const response = await fetch(`http://localhost:8080/api/courses/${courseId}`)
-    return await response.json()
+  return fetch(`http://localhost:8080/api/courses/${courseId}`)
+      .then(function(response) {
+          if (!response.ok) {
+              throw Error(response.statusText);
+          }
+          return response;
+      }).then(function(response) {
+          return response.json();
+      }).catch(function(error) {
+          console.log(error);
+      });
 }
 
 

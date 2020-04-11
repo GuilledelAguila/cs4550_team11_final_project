@@ -1,7 +1,6 @@
 import React from "react";
 import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 import './HomePage.style.client.css';
-import CourseGridComponent from "../../components/CourseGrid/CourseGridComponent";
 import LogInComponent from "../../components/LogIn/LogInComponent";
 import SignUpComponent from "../../components/SignUp/SignUpComponent";
 import StudentOrProfessorComponent from "../../components/SignUp/StuendtOrProfessorComponent";
@@ -64,9 +63,7 @@ class HomePageContainer extends React.Component {
 
                 <Route path={["/course-manager",
                     "/course-manager/table",
-                    "/course-manager/grid",
-                    "/course-manager/table/panel",
-                    "/course-manager/grid/panel"]}
+                    "/course-manager/table/panel"]}
                        exact={true}
                        render={(props) =>
                            <CourseManagerContainer
