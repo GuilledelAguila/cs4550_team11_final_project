@@ -3,18 +3,19 @@ import {connect} from "react-redux";
 import "./CoursePage.style.client.css"
 import icon from "./default-icon.jpg"
 import {editBriefDescription, updateBriefDescription} from "../../actions/instructorActions";
+import courseService from "../../services/CourseService";
 
 class InstructorComponent extends React.Component{
 
     state = {
-        briefDescription: this.props.briefDescription
+        course: this.props.course
     }
 
     render() {
         return(
             <div className="container-fluid instructor text-left">
                 <div className="row space-left">
-                    <h1 className="white">{this.props.courseId} Human Computer Interaction</h1>
+                    <h1 className="white">{this.props.course.id} {this.props.course.name}</h1>
                 </div>
                 <div className="row space-bottom space-left">
                     <div className="col-3 ">
@@ -37,7 +38,7 @@ class InstructorComponent extends React.Component{
                                 {
                                     this.props.editingBriefDescription &&
                                     <button className="btn wbdv-row wbdv-button wbdv-save white"
-                                        onClick={()=> this.props.saveBriefDescription(this.state.briefDescription)}>
+                                        onClick={()=> this.props.saveBriefDescription(this.state.course)}>
                                         <i className="fas fa-check wbdv-button wbdv-save"></i>
                                     </button>
 
@@ -46,19 +47,22 @@ class InstructorComponent extends React.Component{
                         </div>
                         {
                             this.props.editingBriefDescription===false &&
-                            <span className="white">{this.props.briefDescription}</span>
+                            <span className="white">{this.props.course.description}</span>
                         }
                         {
                             this.props.editingBriefDescription &&
                             <textarea className="form-control"
                                       onChange={(e) => {
-                                          const newText = String(e.target.value);
+                                          const newDescription= String(e.target.value);
                                           this.setState(prevState => ({
-                                              briefDescription: newText
+                                              course: {
+                                                  id: this.props.course.id,
+                                                  name: this.props.course.name,
+                                                  description: newDescription
+                                              }
                                           }))
-                                      }
-                                      }
-                                      value={this.state.briefDescription}>
+                                      }}
+                                      value={this.state.course.name}>
                             </textarea>
                         }
                     </div>
@@ -72,7 +76,6 @@ class InstructorComponent extends React.Component{
 
 const stateToPropertyMapper = (state) => {
     return {
-        briefDescription: state.instructor.briefDescription,
         editingBriefDescription: state.instructor.editingBriefDescription
     }
 }
@@ -83,8 +86,11 @@ const dispatchToPropertyMapper = (dispatch) => {
         editBriefDescription: () =>
             dispatch(editBriefDescription()),
 
-        saveBriefDescription: (newDescription) =>
-            dispatch (updateBriefDescription(newDescription))
+        saveBriefDescription: (course) => {
+            courseService.updateCourse(course.id, course)
+                .then(status => dispatch (updateBriefDescription(course.description)))
+        }
+
 
     }
 }

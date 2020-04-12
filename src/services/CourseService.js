@@ -36,8 +36,8 @@ export const findCourseById = async (courseId) => {
 }
 
 
-export const updateCourse = async (id, course) => {
-    return fetch(`${API_URL}/courses/${id}`, {
+export const updateCourse = async (courseId, course) => {
+    return fetch(`http://localhost:8080/api/courses/${courseId}`, {
         method: 'PUT',
         body: JSON.stringify(course),
         headers: {
@@ -61,5 +61,6 @@ export const deleteCourse = async (courseId) =>
 
 export default {
     findAllCourses,
-    findCourseById
+    findCourseById,
+    updateCourse
 }
