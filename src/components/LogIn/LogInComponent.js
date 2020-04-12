@@ -1,6 +1,6 @@
 import React from "react";
 import "./LogIn.style.client.css";
-import {Link, Route} from "react-router-dom";
+
 import {login, register} from "../../services/UserService";
 import {setUser} from "../../actions/userActions";
 import {connect} from "react-redux";
@@ -13,16 +13,9 @@ class LogInComponent extends React.Component {
         login:'FALSE'
     }
 
-    // login = (user) => {
-    //     login(user)
-    //         .then(currentUser => )
-    //
-    // }
+    login = () => login(this.state)
+        .then(response =>this.props.history.push("/course-manager"))
 
-    login = (user) => {
-        this.props.login(user)
-        this.props.history.push("course-manager")
-    }
 
 
     render() {
@@ -64,7 +57,7 @@ class LogInComponent extends React.Component {
                             <div className="col-sm-10">
 
                                     <button
-                                        onClick={() => this.login(this.state)}
+                                        onClick={this.login}
                                         className="btn btn-outline-danger btn-block wbdv-login">Log in</button>
                             </div>
                         </div>
@@ -89,10 +82,6 @@ const stateToPropertyMapper = (state) => {
 
 const dispatchToPropertyMapper = (dispatch) => {
     return {
-
-        login: (user) =>
-            login(user)
-                .then(user => dispatch(setUser(user)))
 
     }
 }

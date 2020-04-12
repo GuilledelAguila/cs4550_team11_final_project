@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Link, Route} from "react-router-dom";
+import {BrowserRouter as Router, Link, Route, useHistory} from "react-router-dom";
 import './HomePage.style.client.css';
 import LogInComponent from "../../components/LogIn/LogInComponent";
 import SignUpComponent from "../../components/SignUp/SignUpComponent";
@@ -36,19 +36,22 @@ class HomePageContainer extends React.Component {
             <Router>
                 <Route path="/"
                        exact={true}
-                       render={(props) =>
-                            <HomePageComponent
-                                {...props}
-                            />
-                       }/>
+                       component={HomePageComponent}/>
 
-                <Route path="/login"
-                       exact={true}
-                       render={(props) =>
-                           <LogInComponent
-                               {...props}
-                           />
-                       }/>
+                {/*<Route path="/login"*/}
+                {/*       exact={true}*/}
+                {/*       render={(props) =>*/}
+                {/*           <LogInComponent*/}
+                {/*               {...props}*/}
+                {/*           />*/}
+                {/*       }/>*/}
+
+                <Route
+                    path="/login"
+                    exact={true}
+                    component={LogInComponent}
+                />
+
                 <Route path="/signup"
                        exact={true}
                        render={(props) =>
@@ -84,11 +87,7 @@ class HomePageContainer extends React.Component {
                     "/course-manager/table",
                     "/course-manager/table/panel"]}
                        exact={true}
-                       render={(props) =>
-                           <CourseManagerContainer
-                               {...props}
-                           />
-                       }/>
+                       component={CourseManagerContainer}/>
                 <Route path="/course-manager/course/:courseId"
                        exact={true}
                        render={(props) =>

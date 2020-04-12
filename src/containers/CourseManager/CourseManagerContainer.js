@@ -3,7 +3,7 @@ import CourseTableComponent from "../../components/CourseTable/CourseTableCompon
 import {findAllCourses, findCourseById, updateCourse, deleteCourse, createCourse} from "../../services/CourseService";
 import CourseNavComponent from "../../components/Navbar/CourseNavComponent";
 import CourseTableHeaderComponent from "../../components/TableHeader/CourseTableHeaderComponent";
-import {BrowserRouter as Router, Link, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import CoursePanelComponent from "../../components/CoursePanelComponent";
 
 
@@ -13,7 +13,9 @@ class CourseManagerContainer extends React.Component {
     render() {
         return(
             <React.Fragment>
-                <CourseNavComponent/>
+                <CourseNavComponent
+                    {...this.props}
+                />
                 
                 <table className="table table-hover">
                     <thead>

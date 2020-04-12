@@ -133,7 +133,7 @@ const dispatchToPropertyMapper = (dispatch) => {
 
         register: (user) =>
                 register(user)
-                    .then(user => dispatch(setUser(user)))
+                    // .then(user => dispatch(setUser(user)))
 
     }
 }

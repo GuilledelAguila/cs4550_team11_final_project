@@ -39,7 +39,7 @@ class CourseNavComponent extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col-7">
+                    <div className="col-6">
                         <input
                             className="form-control wbdv-field"
                             onChange={(e) => {
@@ -53,11 +53,15 @@ class CourseNavComponent extends React.Component {
                             placeholder="New Course Title"
                             id="wbdv-new-course"/>
                     </div>
-                    <div className="col-2">
+                    <div className="col-3">
                         <button onClick= {() => this.props.findCourseById(this.state.courseId)} className="btn  text wbdv-button wbdv-add-course">
                             Find Course
                         </button>
-                        {this.props.user.id && <label>{this.props.user.name}</label>}
+                        {this.props.user && <button
+                            onClick={this.logout}
+                            className="btn btn-danger logout float-right">Logout</button>}
+                        {this.props.user && <button className="btn float-right">{this.props.user.name}</button>}
+
                     </div>
                 </nav>
             </React.Fragment>
