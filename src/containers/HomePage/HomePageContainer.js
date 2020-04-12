@@ -14,6 +14,7 @@ import coursesReducer from "../../reducers/courseReducer";
 import topicsReducer from "../../reducers/topicReducer";
 import discussionReducer from "../../reducers/discussionReducer";
 import instructorReducer from "../../reducers/instructorReducer";
+import userReducer from "../../reducers/userReducer";
 import {Provider} from "react-redux";
 
 
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     courses: coursesReducer,
     topics: topicsReducer,
     discussions: discussionReducer,
-    instructor: instructorReducer
+    instructor: instructorReducer,
+    user: userReducer
 })
 
 const store = createStore(rootReducer);

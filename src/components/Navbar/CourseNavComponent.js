@@ -3,12 +3,26 @@ import "./CourseNav.style.client.css"
 import courseService from "../../services/CourseService";
 import {findAllCourses, findCourseById} from "../../actions/courseActions";
 import {connect} from "react-redux";
+import {profile, logout} from "../../services/UserService";
+import {setUser} from "../../actions/userActions";
 
 class CourseNavComponent extends React.Component {
 
     state = {
-        courseId: ''
+        courseId: '',
+        profile: {
+            username: ''
+        }
     }
+
+    logout = () => logout()
+        .then(status => this.props.history.push("/"))
+
+    componentDidMount() {
+        profile()
+            .then(profile => this.props.setUser(profile))
+    }
+
 
     render() {
         return(
@@ -40,9 +54,10 @@ class CourseNavComponent extends React.Component {
                             id="wbdv-new-course"/>
                     </div>
                     <div className="col-2">
-                        <button onClick= {() => this.props.findCourseById(this.state.courseId)} className="btn text wbdv-button wbdv-add-course">
+                        <button onClick= {() => this.props.findCourseById(this.state.courseId)} className="btn  text wbdv-button wbdv-add-course">
                             Find Course
                         </button>
+                        {this.props.user.id && <label>{this.props.user.name}</label>}
                     </div>
                 </nav>
             </React.Fragment>
@@ -52,7 +67,8 @@ class CourseNavComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
-        courses: state.courses.courses
+        courses: state.courses.courses,
+        user: state.user.user
     }
 }
 
@@ -64,7 +80,9 @@ const dispatchToPropertyMapper = (dispatch) => {
                     if(course){
                         dispatch(findCourseById(course.id))
                     }
-                })
+                }),
+
+        setUser: (user) => dispatch(setUser(user))
     }
 }
 

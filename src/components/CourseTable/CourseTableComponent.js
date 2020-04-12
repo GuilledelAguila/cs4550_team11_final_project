@@ -34,7 +34,8 @@ class CourseTableComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
-        courses: state.courses.courses
+        courses: state.courses.courses,
+        user: state.user.user
     }
 }
 

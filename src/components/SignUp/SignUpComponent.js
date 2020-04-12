@@ -1,9 +1,11 @@
 import React from "react";
 import "./SignUp.style.client.css"
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {register} from "../../services/UserService";
+import {setUser} from '../../actions/userActions'
 
-export default class SignUpComponent extends React.Component{
+class SignUpComponent extends React.Component{
 
     state = {
         name: '',
@@ -15,8 +17,7 @@ export default class SignUpComponent extends React.Component{
 
     register = (user) => {
         if (this.state.verifyPassword === this.state.password){
-            register(user)
-                .then(user => console.log(user))
+            this.props.register(user)
             this.props.history.push("/course-manager")
         } else {
             alert("Passwords don't match")
@@ -115,13 +116,30 @@ export default class SignUpComponent extends React.Component{
                             </div>
                         </div>
                     </form>
-
-
                 </div>
             </React.Fragment>
         )
     }
 }
 
+const stateToPropertyMapper = (state) => {
+    return {
+        user: state.user.user
+    }
+}
 
+const dispatchToPropertyMapper = (dispatch) => {
+    return {
+
+        register: (user) =>
+                register(user)
+                    .then(user => dispatch(setUser(user)))
+
+    }
+}
+
+export default connect(
+    stateToPropertyMapper,
+    dispatchToPropertyMapper)
+(SignUpComponent)
 
