@@ -9,6 +9,7 @@ import CourseManagerContainer from "../CourseManager/CourseManagerContainer";
 import ConfirmEmailComponent from "../../components/SignUp/ConfirmEmailComponent";
 import CoursePageComponent from "../../components/CoursePage/CoursePageComponent";
 import HomePageComponent from "../../components/HomePageComponent";
+import AdminComponent from "../../components/Admin/AdminComponent";
 import {combineReducers, createStore} from "redux";
 import coursesReducer from "../../reducers/courseReducer";
 import topicsReducer from "../../reducers/topicReducer";
@@ -55,7 +56,7 @@ class HomePageContainer extends React.Component {
                 <Route path="/signup"
                        exact={true}
                        render={(props) =>
-                           <StudentOrProfessorComponent
+                           <SignUpComponent
                                {...props}
                            />
                        }/>
@@ -66,14 +67,24 @@ class HomePageContainer extends React.Component {
                                {...props}
                            />
                        }/>
-                <Route path="/signup/form"
+
+                <Route path="/course-manager/admin"
                        exact={true}
                        render={(props) =>
-                            <SignUpComponent
-                                {...props}
-                            />
-                       }
-                       />
+                           <AdminComponent
+                               {...props}
+                           />
+                       }/>
+
+
+                {/*<Route path="/signup/form"*/}
+                {/*       exact={true}*/}
+                {/*       render={(props) =>*/}
+                {/*            <SignUpComponent*/}
+                {/*                {...props}*/}
+                {/*            />*/}
+                {/*       }*/}
+                {/*       />*/}
 
                 <Route path="/signup/confirmemail"
                        exact={true}

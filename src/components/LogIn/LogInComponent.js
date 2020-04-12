@@ -1,11 +1,9 @@
 import React from "react";
 import "./LogIn.style.client.css";
+import {login} from "../../services/UserService";
 
-import {login, register} from "../../services/UserService";
-import {setUser} from "../../actions/userActions";
-import {connect} from "react-redux";
 
-class LogInComponent extends React.Component {
+export default class LogInComponent extends React.Component {
 
     state = {
         name: '',
@@ -13,9 +11,12 @@ class LogInComponent extends React.Component {
         login:'FALSE'
     }
 
-    login = () => login(this.state)
-        .then(response =>this.props.history.push("/course-manager"))
-
+    login = (user) =>
+        login(user)
+            .then(currentUser => {
+                if(currentUser.id) this.props.history.push('/course-manager')
+                else alert("Incorrect password or name")
+            })
 
 
     render() {
@@ -23,7 +24,7 @@ class LogInComponent extends React.Component {
             <React.Fragment>
                 <div className="login-page">
                     <h1 className="h1-login">Welcome</h1>
-                    <form className="container-login">
+                    <div className="container-login">
                         <div className="form-group row">
                             <label htmlFor="username" className="col-sm-2 col-form-label">
                                 Username </label>
@@ -57,11 +58,11 @@ class LogInComponent extends React.Component {
                             <div className="col-sm-10">
 
                                     <button
-                                        onClick={this.login}
+                                        onClick={() => this.login(this.state)}
                                         className="btn btn-outline-danger btn-block wbdv-login">Log in</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
 
 
                 </div>
@@ -73,20 +74,3 @@ class LogInComponent extends React.Component {
 
 }
 
-
-const stateToPropertyMapper = (state) => {
-    return {
-        user: state.user.user
-    }
-}
-
-const dispatchToPropertyMapper = (dispatch) => {
-    return {
-
-    }
-}
-
-export default connect(
-    stateToPropertyMapper,
-    dispatchToPropertyMapper)
-(LogInComponent)

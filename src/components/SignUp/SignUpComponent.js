@@ -1,11 +1,9 @@
 import React from "react";
 import "./SignUp.style.client.css"
-import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import {register} from "../../services/UserService";
-import {setUser} from '../../actions/userActions'
 
-class SignUpComponent extends React.Component{
+
+export default class SignUpComponent extends React.Component{
 
     state = {
         name: '',
@@ -13,24 +11,22 @@ class SignUpComponent extends React.Component{
         password:'',
         verifyPassword: '',
         email: '',
+        userType: 'STUDENT'
     }
 
-    register = (user) => {
-        if (this.state.verifyPassword === this.state.password){
-            this.props.register(user)
-            this.props.history.push("/course-manager")
-        } else {
-            alert("Passwords don't match")
-        }
-
-    }
+    register = (user) =>
+        register(user)
+            .then(newUser => {
+                if(this.state.password === this.state.verifyPassword) this.props.history.push('/course-manager')
+                else alert("Passwords don't match!")
+            })
 
     render() {
         return(
             <React.Fragment>
                 <div className="signup-page">
                     <h1 className="white">Sign Up</h1>
-                    <form className="container-login2">
+                    <div className="container-login2">
                         <div className="form-group row">
                             <label htmlFor="nameFld" className="col-sm-2 col-form-label">
                                 Name </label>
@@ -59,6 +55,22 @@ class SignUpComponent extends React.Component{
                                     id="lastNameFld"
                                     placeholder="Introduce your last name"/>
                             </div>
+                        </div>
+                        <div className="form-group row">
+                            <label htmlFor="lastNameFld" className="col-sm-2 col-form-label">
+                                User type </label>
+                            <div className="col-sm-10">
+                                <select className="form-control wbdv-field"
+                                        onChange={(e) => this.setState({
+                                                userType: String(e.target.value)
+                                            })}
+                                        value={this.state.userType}>
+                                    <option value="STUDENT">Student</option>
+                                    <option value="FACULTY">Faculty</option>
+
+                                </select>
+                            </div>
+
                         </div>
                         <div className="form-group row">
                             <label htmlFor="emailFld" className="col-sm-2 col-form-label">
@@ -115,31 +127,10 @@ class SignUpComponent extends React.Component{
 
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </React.Fragment>
         )
     }
 }
-
-const stateToPropertyMapper = (state) => {
-    return {
-        user: state.user.user
-    }
-}
-
-const dispatchToPropertyMapper = (dispatch) => {
-    return {
-
-        register: (user) =>
-                register(user)
-                    // .then(user => dispatch(setUser(user)))
-
-    }
-}
-
-export default connect(
-    stateToPropertyMapper,
-    dispatchToPropertyMapper)
-(SignUpComponent)
 

@@ -71,21 +71,12 @@ class CourseNavComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
-        courses: state.courses.courses,
         user: state.user.user
     }
 }
 
 const dispatchToPropertyMapper = (dispatch) => {
     return {
-        findCourseById: (courseId) =>
-            courseService.findCourseById(courseId)
-                .then(course => {
-                    if(course){
-                        dispatch(findCourseById(course.id))
-                    }
-                }),
-
         setUser: (user) => dispatch(setUser(user))
     }
 }

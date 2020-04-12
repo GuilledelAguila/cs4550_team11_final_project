@@ -21,14 +21,18 @@ const HomePageComponent = (props) =>
                     </li>
                 </ul>
                 <span className="navbar-text">
-                           <Link to="/login">
-                               <button className="btn btn-outline-danger nav-item float-right" type="button">Log In</button>
-                           </Link>
-                           <Link to="/signup">
-                               <button className="btn btn-outline-danger" type="button">Sign Up
-                           </button>
-                           </Link>
-                           </span>
+                    <Link to="/login">
+                       <button
+                           className="btn btn-outline-danger nav-item float-right" type="button">
+                           Log In
+                       </button>
+                    </Link>
+                    <Link to="/signup">
+                        <button className="btn btn-outline-danger" type="button">
+                            Sign Up
+                        </button>
+                    </Link>
+                </span>
             </div>
         </nav>
         <div className="hv-100 justify-content-center align-items-center">
