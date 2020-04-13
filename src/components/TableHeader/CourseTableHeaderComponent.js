@@ -16,17 +16,7 @@ const CourseTableHeaderComponent = () =>
                        <th className="wbdv-header wbdv-owner owned-collapse" scope="col">
                            <label>Course ID</label>
                        </th>
-                       <th className="wbdv-header wbdv-owner owned-collapse" scope="col">
-                           <label>Owned by</label>
-                       </th>
-                       <th className="wbdv-header wbdv-last-modified lastModified-collapse" scope="col">
-                       <div className="form-check">
-                           <input className="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
-                               <label className="form-check-label" htmlFor="defaultCheck1">
-                                   Last Modified by Me
-                               </label>
-                       </div>
-                       </th>
+
                        <th scope="col">
                            <button className="btn wbdv-button wbdv-header wbdv-sort" data-toggle="tooltip"
                                    title="Sort">
