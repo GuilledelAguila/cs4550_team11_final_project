@@ -10,8 +10,8 @@ class CourseRowUnselectedComponent extends React.Component {
                 <td>
                     <div>
                         <Link data-tip="Click to select row" className="black"to={`/course-manager/course/${this.props.course.id}`}>
-                            <i className="fas fa-file-alt wbdv-row wbdv-icon"/>
-                        <label className="courseTitle">{this.props.course.name}</label>
+                            {/*<i className="fas fa-file-alt wbdv-row wbdv-icon"/>*/}
+                        <label className="courseTitle"> { this.props.course.name}</label>
                         </Link>
                     </div>
                 </td>
