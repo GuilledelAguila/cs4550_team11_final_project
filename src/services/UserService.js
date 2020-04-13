@@ -81,7 +81,7 @@ export const login = (user) =>
     }).then(response => response.json())
 
 export const findUsersToValidate = () =>
-    fetch(`https://project-springboot-server-t11.herokuapp.com/users/faculty/validate`).then(response => response.json())
+    fetch(`c/users/faculty/validate`).then(response => response.json())
 
 export const updateValidateFaculty = (userId) =>
     fetch(`https://project-springboot-server-t11.herokuapp.com/users/faculty/validate/${userId}`, {
