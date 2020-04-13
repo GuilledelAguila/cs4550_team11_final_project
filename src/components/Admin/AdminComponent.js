@@ -7,7 +7,6 @@ import {findCourseById} from "../../actions/courseActions";
 
  class AdminComponent extends React.Component {
      componentDidMount() {
-         this.props.getUser().then(r => console.log(r))
      }
 
      render() {
@@ -24,6 +23,7 @@ import {findCourseById} from "../../actions/courseActions";
 }
 
 const stateToPropertyMapper = (state) => {
+     console.log(state)
     return {
         user: state.user.user
     }
@@ -31,7 +31,6 @@ const stateToPropertyMapper = (state) => {
 const dispatchToPropertyMapper = (dispatch) => {
     return {
         setUser: (user) => dispatch(setUser(user)),
-        getUser: () => dispatch(getUser())
     }
 }
 

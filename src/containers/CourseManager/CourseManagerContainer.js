@@ -3,7 +3,7 @@ import CourseTableComponent from "../../components/CourseTable/CourseTableCompon
 import {findAllCourses, findCourseById, updateCourse, deleteCourse, createCourse} from "../../services/CourseService";
 import CourseNavComponent from "../../components/Navbar/CourseNavComponent";
 import CourseTableHeaderComponent from "../../components/TableHeader/CourseTableHeaderComponent";
-import {Route} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 import CoursePanelComponent from "../../components/CoursePanelComponent";
 
 
@@ -37,6 +37,8 @@ class CourseManagerContainer extends React.Component {
                                courses={this.state.courses}
                            />
                        }/>
+                <Link data-tip="Click to select row" className="black"to={`/course-manager/admin`}>ADMIN
+                </Link>
             </React.Fragment>
         )
     }

@@ -1,20 +1,28 @@
 import {FIND_COURSE_BY_ID, FIND_ALL_COURSES} from "../actions/courseActions"
 
-const courses = [
-    {id: "0", name: "New Course", description: "New Description"},
-]
 
-const coursesReducer = (
-    state = {courses: courses}, action) => {
+const initialState = {
+    courses: [
+        {id: "0", name: "New Course", description: "New Description"},
+    ],
+}
+
+
+const coursesReducer = (state = initialState, action) => {
+
     switch (action.type) {
         case FIND_ALL_COURSES:
             return {
-                courses: action.courses
+                course: state.course,
+                courses: action.courses,
+                editBriefDescription: false,
             }
 
         case FIND_COURSE_BY_ID:
             return {
-                courses: state.courses.filter(course => course.id === action.courseId)
+                course: state.course,
+                courses: state.courses.filter(course => course.id === action.courseId),
+                editBriefDescription: false,
             }
 
         default:

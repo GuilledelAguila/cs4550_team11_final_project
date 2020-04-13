@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Link, Route, useHistory} from "react-router-dom
 import './HomePage.style.client.css';
 import LogInComponent from "../../components/LogIn/LogInComponent";
 import SignUpComponent from "../../components/SignUp/SignUpComponent";
-import StudentOrProfessorComponent from "../../components/SignUp/StuendtOrProfessorComponent";
 import SignUpProfessorComponent from "../../components/SignUp/SignUpProfessorComponent";
 import CourseManagerContainer from "../CourseManager/CourseManagerContainer";
 import ConfirmEmailComponent from "../../components/SignUp/ConfirmEmailComponent";
@@ -14,7 +13,6 @@ import {combineReducers, createStore} from "redux";
 import coursesReducer from "../../reducers/courseReducer";
 import topicsReducer from "../../reducers/topicReducer";
 import discussionReducer from "../../reducers/discussionReducer";
-import instructorReducer from "../../reducers/instructorReducer";
 import userReducer from "../../reducers/userReducer";
 import {Provider} from "react-redux";
 
@@ -23,7 +21,6 @@ const rootReducer = combineReducers({
     courses: coursesReducer,
     topics: topicsReducer,
     discussions: discussionReducer,
-    instructor: instructorReducer,
     user: userReducer
 })
 
@@ -38,14 +35,6 @@ class HomePageContainer extends React.Component {
                 <Route path="/"
                        exact={true}
                        component={HomePageComponent}/>
-
-                {/*<Route path="/login"*/}
-                {/*       exact={true}*/}
-                {/*       render={(props) =>*/}
-                {/*           <LogInComponent*/}
-                {/*               {...props}*/}
-                {/*           />*/}
-                {/*       }/>*/}
 
                 <Route
                     path="/login"
@@ -68,23 +57,6 @@ class HomePageContainer extends React.Component {
                            />
                        }/>
 
-                <Route path="/course-manager/admin"
-                       exact={true}
-                       render={(props) =>
-                           <AdminComponent
-                               {...props}
-                           />
-                       }/>
-
-
-                {/*<Route path="/signup/form"*/}
-                {/*       exact={true}*/}
-                {/*       render={(props) =>*/}
-                {/*            <SignUpComponent*/}
-                {/*                {...props}*/}
-                {/*            />*/}
-                {/*       }*/}
-                {/*       />*/}
 
                 <Route path="/signup/confirmemail"
                        exact={true}
@@ -99,6 +71,15 @@ class HomePageContainer extends React.Component {
                     "/course-manager/table/panel"]}
                        exact={true}
                        component={CourseManagerContainer}/>
+
+                <Route path="/course-manager/admin"
+                       exact={true}
+                       render={(props) =>
+                           <AdminComponent
+                               {...props}
+                           />
+                       }/>
+
                 <Route path="/course-manager/course/:courseId"
                        exact={true}
                        render={(props) =>
@@ -107,6 +88,7 @@ class HomePageContainer extends React.Component {
                                courseId={props.match.params.courseId}
                            />
                        }/>
+
                 <Route path="/course-manager/course/:courseId/topic/:topicId"
                        exact={true}
                        render={(props) =>
