@@ -1,11 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {findAllTopics} from "../../actions/topicActions";
+import {findAllTopics, findTopicsForCourse} from "../../actions/topicActions";
+import topicService  from "../../services/TopicService";
+
 class  TopicsComponent extends React.Component {
 
     componentDidMount() {
-        this.props.findAllTopics()
+        this.props.findTopicsForCourse(this.props.courseId)
     }
 
     render() {
@@ -42,7 +44,11 @@ const dispatchToPropertyMapper = (dispatch) => {
     return {
 
         findAllTopics: () =>
-            dispatch(findAllTopics())
+            dispatch(findAllTopics()),
+
+        findTopicsForCourse: (courseId) =>
+            topicService.findTopicsForCourse(courseId)
+                .then(actualTopics => dispatch(findTopicsForCourse(actualTopics)))
 
     }
 }
