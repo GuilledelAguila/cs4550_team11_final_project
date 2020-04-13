@@ -7,6 +7,8 @@ import CourseManagerContainer from "../CourseManager/CourseManagerContainer";
 import CoursePageComponent from "../../components/CoursePage/CoursePageComponent";
 import HomePageComponent from "../../components/HomePageComponent";
 import AdminComponent from "../../components/Admin/AdminComponent";
+import AwaitValidationComponent from "../../components/Admin/awaitValidationComponent";
+import ProfileComponent from "../../components/Profile/ProfileComponent";
 import {combineReducers, createStore} from "redux";
 import coursesReducer from "../../reducers/courseReducer";
 import topicsReducer from "../../reducers/topicReducer";
@@ -44,6 +46,22 @@ class HomePageContainer extends React.Component {
                        exact={true}
                        render={(props) =>
                            <SignUpComponent
+                               {...props}
+                           />
+                       }/>
+
+
+                <Route path="/await"
+                       exact={true}
+                       render={(props) =>
+                           <AwaitValidationComponent
+                               {...props}
+                           />
+                       }/>
+                <Route path="/profile"
+                       exact={true}
+                       render={(props) =>
+                           <ProfileComponent
                                {...props}
                            />
                        }/>

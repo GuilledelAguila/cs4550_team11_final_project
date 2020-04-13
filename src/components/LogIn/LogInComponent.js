@@ -14,7 +14,12 @@ export default class LogInComponent extends React.Component {
     login = (user) =>
         login(user)
             .then(currentUser => {
-                if(currentUser.id) this.props.history.push('/course-manager')
+                if(currentUser.id) {
+                    if(currentUser.validated === false && currentUser.userType === "FACULTY") {
+                        this.props.history.push('/await')
+                    }
+                    else this.props.history.push('/course-manager')
+                }
                 else alert("Incorrect password or name")
             })
 

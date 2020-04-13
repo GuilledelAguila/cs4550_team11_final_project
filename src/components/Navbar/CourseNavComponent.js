@@ -5,6 +5,7 @@ import {findAllCourses, findCourseById} from "../../actions/courseActions";
 import {connect} from "react-redux";
 import {profile, logout} from "../../services/UserService";
 import {setUser} from "../../actions/userActions";
+import {Link} from "react-router-dom";
 
 class CourseNavComponent extends React.Component {
 
@@ -20,7 +21,10 @@ class CourseNavComponent extends React.Component {
 
     componentDidMount() {
         profile()
-            .then(profile => this.props.setUser(profile))
+            .then(profile => {
+                if(profile.status === 500) this.props.history.push("/")
+                else this.props.setUser(profile)
+            })
     }
 
 
@@ -60,7 +64,17 @@ class CourseNavComponent extends React.Component {
                         {this.props.user && <button
                             onClick={this.logout}
                             className="btn btn-danger logout float-right">Logout</button>}
-                        {this.props.user && <button className="btn float-right">{this.props.user.name}</button>}
+
+                        {this.props.user.userType === "ADMIN" &&
+                        <Link to={`/course-manager/admin`} className="btn btn-success float-right">
+                            {this.props.user.name}
+                        </Link>}
+
+                        {this.props.user.userType !== "ADMIN" &&
+                        <Link to={`/profile`} className="btn btn-success float-right">
+                            {this.props.user.name}
+                        </Link>}
+
 
                     </div>
                 </nav>
