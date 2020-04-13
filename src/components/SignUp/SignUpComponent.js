@@ -14,12 +14,25 @@ export default class SignUpComponent extends React.Component{
         userType: 'STUDENT'
     }
 
-    register = (user) =>
-        register(user)
-            .then(newUser => {
-                if(this.state.password === this.state.verifyPassword) this.props.history.push('/course-manager')
-                else alert("Passwords don't match!")
-            })
+    register = (user) => {
+        if(this.state.password === this.state.verifyPassword) {
+            register(user)
+                .then(newUser => {
+                    if (newUser.id) {
+                        if (newUser.validated === false && newUser.userType === "FACULTY") {
+                            this.props.history.push('/await')
+                        } else {
+                            this.props.history.push('/course-manager')
+                        }
+                    }
+                })
+
+        } else {
+            alert("Passwords don't match!")
+        }
+
+    }
+
 
     render() {
         return(

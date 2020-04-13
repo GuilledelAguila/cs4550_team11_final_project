@@ -37,8 +37,7 @@ class CourseManagerContainer extends React.Component {
                                courses={this.state.courses}
                            />
                        }/>
-                <Link data-tip="Click to select row" className="black"to={`/course-manager/admin`}>ADMIN
-                </Link>
+
             </React.Fragment>
         )
     }
