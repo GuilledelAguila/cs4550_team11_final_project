@@ -1,4 +1,4 @@
-import {FIND_ALL_TOPICS, UPDATE_TOPIC} from "../actions/topicActions";
+import {FIND_ALL_TOPICS, FIND_TOPICS_FOR_COURSE, UPDATE_TOPIC} from "../actions/topicActions";
 
 const topics = [
     {id: "0", title: "Grading"},
@@ -20,6 +20,12 @@ const topicReducer = (
             return {
                 topics: [...state.topics]
             }
+
+        case FIND_TOPICS_FOR_COURSE:
+            return {
+                topics: action.actualTopics
+            }
+
         default:
             return state
     }

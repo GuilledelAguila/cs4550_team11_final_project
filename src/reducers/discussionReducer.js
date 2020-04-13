@@ -55,7 +55,8 @@ const discussionReducer = (
                 ...state,
                 adding: -1
             }
-        case SAVE_COMMENT:
+        case SAVE_COMMENT
+        :
             return {
                 ...state,
                 adding: -1,
