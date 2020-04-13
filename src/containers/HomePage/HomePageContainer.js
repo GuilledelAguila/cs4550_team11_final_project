@@ -3,9 +3,7 @@ import {BrowserRouter as Router, Link, Route, useHistory} from "react-router-dom
 import './HomePage.style.client.css';
 import LogInComponent from "../../components/LogIn/LogInComponent";
 import SignUpComponent from "../../components/SignUp/SignUpComponent";
-import SignUpProfessorComponent from "../../components/SignUp/SignUpProfessorComponent";
 import CourseManagerContainer from "../CourseManager/CourseManagerContainer";
-import ConfirmEmailComponent from "../../components/SignUp/ConfirmEmailComponent";
 import CoursePageComponent from "../../components/CoursePage/CoursePageComponent";
 import HomePageComponent from "../../components/HomePageComponent";
 import AdminComponent from "../../components/Admin/AdminComponent";
@@ -46,22 +44,6 @@ class HomePageContainer extends React.Component {
                        exact={true}
                        render={(props) =>
                            <SignUpComponent
-                               {...props}
-                           />
-                       }/>
-                <Route path="/signup/professor"
-                       exact={true}
-                       render={(props) =>
-                           <SignUpProfessorComponent
-                               {...props}
-                           />
-                       }/>
-
-
-                <Route path="/signup/confirmemail"
-                       exact={true}
-                       render={(props) =>
-                           <ConfirmEmailComponent
                                {...props}
                            />
                        }/>
