@@ -20,10 +20,11 @@ const discussions = {
     {id: "127", title: "Very strict grading!",
         body:"Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.", topic:"0", user:"Andy"},
     {id: "128", title: "Very good instructor",
-        body:"Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.", topic:"2", user:"April"}]
+        body:"Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.", topic: "4", user:"April"}]
 };
 
 const discussionReducer = (
+
     state = discussions, action) => {
     switch (action.type) {
         case UPDATE_DISCUSSIONS:
@@ -41,10 +42,12 @@ const discussionReducer = (
                     action.discussion
                 ]
             }
+
         case FIND_ALL_DISCUSSIONS_FOR_TOPIC:
             return {
-                discussions: state.discussions
+                discussions: action.actualDiscussions,
             }
+
         case ADDING_COMMENT:
             return {
                 ...state,

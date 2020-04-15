@@ -1,8 +1,13 @@
 import React from "react";
-
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
-import {addComment, cancelComment, saveComment, updateDiscussion} from "../../actions/discussionActions";
+import {
+    addComment,
+    cancelComment,
+    findAllDiscussionsForTopic,
+    saveComment,
+    updateDiscussion
+} from "../../actions/discussionActions";
+import discussionService  from "../../services/DiscussionService";
 
 class ConversationsComponent extends React.Component{
 
@@ -12,6 +17,11 @@ class ConversationsComponent extends React.Component{
         topic:"",
         body:"",
         user:"Anonymus"
+    }
+
+    componentDidMount() {
+        console.log(this.props.topicId)
+        this.props.findDiscussionsForTopic(this.props.topicId)
     }
 
     render() {
@@ -62,7 +72,7 @@ class ConversationsComponent extends React.Component{
                         </form>
                         <button type="button" className="btn btn-success"
                                 onClick={() => {
-                                    this.props.saveComment(this.state)
+                                    this.props.saveComment(this.props.topicId, this.state)
                                 }}>
                             Save</button>
                         <button type="button" className="btn btn-danger"
@@ -70,7 +80,7 @@ class ConversationsComponent extends React.Component{
                     </a>
                     }
                     {
-                        this.props.discussions && this.props.discussions.discussions.map(discussion =>
+                        this.props.discussions.discussions && this.props.discussions.discussions.map(discussion =>
                             discussion.topic === this.props.topicId &&
                             <a href="#"
                                className="list-group-item list-group-item-action flex-column align-items-start">
@@ -108,13 +118,19 @@ const dispatchToPropertyMapper = (dispatch) => {
         addingComment: () => {
             dispatch(addComment())
         },
-        saveComment: (discussion) => {
+        saveComment: (topicId, discussion) => {
+            discussionService.createDiscussion(topicId, discussion)
             dispatch(saveComment(discussion))
         },
+
         cancelComment: () => {
             dispatch(cancelComment())
-        }
+        },
 
+        findDiscussionsForTopic: (topicId) => {
+            discussionService.findDiscussionsForTopic(topicId)
+                .then(actualDiscussions => dispatch(findAllDiscussionsForTopic(actualDiscussions)))
+        }
 
 
     }

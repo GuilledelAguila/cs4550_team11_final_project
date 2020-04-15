@@ -22,8 +22,9 @@ export const createDiscussion = (discussion) => ({
     discussion: discussion
 })
 
-export const findAllDiscussionsForTopic = () => ({
-    type: FIND_ALL_DISCUSSIONS_FOR_TOPIC
+export const findAllDiscussionsForTopic = (actualDiscussions) => ({
+    type: FIND_ALL_DISCUSSIONS_FOR_TOPIC,
+    actualDiscussions: actualDiscussions
 })
 
 export const addComment = () => ({

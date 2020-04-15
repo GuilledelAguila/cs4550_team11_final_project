@@ -22,7 +22,6 @@ class CoursePageComponent extends React.Component{
                         <div className="row">
                             <TopicsComponent
                                 courseId = {this.props.courseId}
-                                topicId = {this.props.topicId}
                             />
                             <ConversationsComponent
                                 courseId = {this.props.courseId}
