@@ -15,6 +15,8 @@ import topicsReducer from "../../reducers/topicReducer";
 import discussionReducer from "../../reducers/discussionReducer";
 import userReducer from "../../reducers/userReducer";
 import {Provider} from "react-redux";
+import EventsSearchComponent from "../../components/Events/eventsSearchComponent";
+import EventDetailsComponent from "../../components/Events/eventsDetailsComponent";
 
 
 const rootReducer = combineReducers({
@@ -98,6 +100,21 @@ class HomePageContainer extends React.Component {
                                topicId={props.match.params.topicId}
                            />
                        }/>
+
+                <Route
+                    path={`/course-manager/course/:courseId/event`}
+                    exact={true}
+                    component={EventsSearchComponent}/>
+
+                <Route
+                    path={`/course-manager/course/:courseId/event/search/:searchLocation`}
+                    exact={true}
+                    component={EventsSearchComponent}/>
+
+                <Route
+                    path={`/course-manager/course/:courseId/event/:eventID`}
+                    exact={true}
+                    component={EventDetailsComponent}/>
 
             </Router>
             </Provider>

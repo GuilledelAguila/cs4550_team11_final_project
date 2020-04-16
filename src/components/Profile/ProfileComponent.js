@@ -4,6 +4,7 @@ import {setUser, getUser} from "../../actions/userActions";
 import {connect} from "react-redux";
 import {findUsersToValidate, updateValidateFaculty, updateUnvalidateFaculty} from "../../services/UserService";
 import {Link} from "react-router-dom";
+import {findEventsForUser} from "../../services/UserService";
 
 
 class ProfileComponent extends React.Component {
@@ -13,6 +14,8 @@ class ProfileComponent extends React.Component {
     componentDidMount() {
         profile()
             .then(profile => this.props.setUser(profile))
+        findEventsForUser()
+            .then(events => console.log(events))
     }
 
     refresh = () => {
@@ -31,6 +34,7 @@ class ProfileComponent extends React.Component {
                     <li className="list-group-item">Type: {this.props.user.userType}</li>
                     <li className="list-group-item">Email: {this.props.user.email}</li>
                 </ul>
+                {this.state.events && this.state.events.map(event => event.title)}
                 <br/>
                 <Link to={"/course-manager"}>
                     <button className="btn btn-primary h1 float-right">Exit</button>

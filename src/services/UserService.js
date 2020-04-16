@@ -46,6 +46,12 @@ export const updateUnvalidateFaculty = (userId) =>
         credentials: "include"
     })
 
+export const findEventsForUser = () =>
+    fetch(`http://localhost:8080/users/events/`, {
+        method: 'GET',
+        credentials: "include"
+    }).then(response => response.json())
+
 
 
 // export const logout = () =>

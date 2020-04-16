@@ -18,9 +18,14 @@ class  TopicsComponent extends React.Component {
                         <text className="list-group-item">
                             <h4>CONVERSATION TOPICS</h4>
                         </text>
+                        <Link to={`/course-manager/course/${this.props.courseId}/event`}
+                              className="list-group-item list-group-item-action">
+                            Events
+                        </Link>
                         {
                             this.props.topics && this.props.topics.topics.map(topic =>
-                                <Link to={`/course-manager/course/${this.props.courseId}/topic/${topic.id}`} className="list-group-item list-group-item-action">
+                                <Link to={`/course-manager/course/${this.props.courseId}/topic/${topic.id}`}
+                                      className="list-group-item list-group-item-action">
                                     {topic.title}
                                 </Link>
                             )
