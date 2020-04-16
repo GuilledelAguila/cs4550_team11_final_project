@@ -3,28 +3,35 @@ import "./CoursePage.style.client.css"
 import icon from "./default-icon.jpg"
 import courseService from "../../services/CourseService";
 import {Link} from "react-router-dom";
+import {profile} from "../../services/UserService";
 
 
 class InstructorComponent extends React.Component{
 
     componentWillMount() {
+        profile()
+            .then(profile =>this.setState(prevState => ({
+                course: prevState.course,
+                editingBriefDescription: false,
+                user: profile
+            })))
         this.findCourseById(this.props.courseId)
-
     }
 
     findCourseById = (courseId) => {
         courseService.findCourseById(courseId)
             .then(actualCourse => this.setState(prevState => ({
                 course: actualCourse,
-                editingBriefDescription: false
+                editingBriefDescription: false,
+                user: prevState.user
             })))
-        console.log(this.state.course)
     }
 
     editBriefDescription = () => {
         this.setState(prevState => ({
             course: prevState.course,
-            editingBriefDescription: true
+            editingBriefDescription: true,
+            user: prevState.user
         }))
     }
 
@@ -32,13 +39,15 @@ class InstructorComponent extends React.Component{
         courseService.updateCourse(this.state.course.id, this.state.course)
             .then(state => this.setState(prevState => ({
                 course: this.state.course,
-                editingBriefDescription: false
+                editingBriefDescription: false,
+                user: prevState.user
             })))
     }
 
     state = {
         course: '',
-        editingBriefDescription: false
+        editingBriefDescription: false,
+        user: ''
     }
 
 
@@ -63,19 +72,24 @@ class InstructorComponent extends React.Component{
                             </div>
                             <div className="col-2">
                                 {
-                                    this.state.editingBriefDescription === false &&
-                                    <button className="btn hidden wbdv-row wbdv-button wbdv-edit white"
-                                        onClick={this.editBriefDescription}>
-                                        <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
-                                    </button>
-                                }
-                                {
-                                    this.state.editingBriefDescription &&
-                                    <button className="btn wbdv-row wbdv-button wbdv-save white"
-                                        onClick={()=> this.saveBriefDescription(this.state.course)}>
-                                        <i className="fas fa-check wbdv-button wbdv-save"></i>
-                                    </button>
+                                    this.state.user.userType === 'FACULTY' &&
+                                        <div>
+                                            {
+                                                this.state.editingBriefDescription === false &&
+                                                <button className="btn hidden wbdv-row wbdv-button wbdv-edit white"
+                                                        onClick={this.editBriefDescription}>
+                                                    <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
+                                                </button>
+                                            }
+                                            {
+                                                this.state.editingBriefDescription &&
+                                                <button className="btn wbdv-row wbdv-button wbdv-save white"
+                                                        onClick={()=> this.saveBriefDescription(this.state.course)}>
+                                                    <i className="fas fa-check wbdv-button wbdv-save"></i>
+                                                </button>
 
+                                            }
+                                        </div>
                                 }
                             </div>
                         </div>

@@ -86,7 +86,7 @@ class ConversationsComponent extends React.Component{
                                     <small>Today</small>
                                 </div>
                                 <p className="mb-1">{discussion.body}</p>
-                                <small>By {discussion.user}</small>
+                                {/*<small>By {discussion.user}</small>*/}
                             </a>
                         )
                     }
