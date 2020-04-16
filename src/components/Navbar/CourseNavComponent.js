@@ -25,6 +25,7 @@ class CourseNavComponent extends React.Component {
                 if(profile.status === 500) this.props.history.push("/")
                 else this.props.setUser(profile)
             })
+
     }
 
 
@@ -85,12 +86,14 @@ class CourseNavComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
-        user: state.user.user
+        user: state.user.user,
+        courses: state.courses.courses
     }
 }
 
 const dispatchToPropertyMapper = (dispatch) => {
     return {
+        findCourseById: (courseId) => dispatch(findCourseById(courseId)),
         setUser: (user) => dispatch(setUser(user))
     }
 }
