@@ -45,7 +45,8 @@ const discussionReducer = (
 
         case FIND_ALL_DISCUSSIONS_FOR_TOPIC:
             return {
-                discussions: action.actualDiscussions,
+                ...state,
+                discussions: action.actualDiscussions
             }
 
         case ADDING_COMMENT:

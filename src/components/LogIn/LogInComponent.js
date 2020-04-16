@@ -1,6 +1,7 @@
 import React from "react";
 import "./LogIn.style.client.css";
 import {login} from "../../services/UserService";
+import {Link} from "react-router-dom";
 
 
 export default class LogInComponent extends React.Component {
@@ -28,7 +29,7 @@ export default class LogInComponent extends React.Component {
         return (
             <React.Fragment>
                 <div className="login-page">
-                    <h1 className="h1-login">Welcome</h1>
+                    <h1 className="h1-login">Welcome to HuskyInfo</h1>
                     <div className="container-login">
                         <div className="form-group row">
                             <label htmlFor="username" className="col-sm-2 col-form-label">
@@ -66,6 +67,11 @@ export default class LogInComponent extends React.Component {
                                         onClick={() => this.login(this.state)}
                                         className="btn btn-outline-danger btn-block wbdv-login">Log in</button>
                             </div>
+                        </div>
+                        <div className="link">
+                            <Link to={`/signup`}>
+                                Sign up
+                            </Link>
                         </div>
                     </div>
 
