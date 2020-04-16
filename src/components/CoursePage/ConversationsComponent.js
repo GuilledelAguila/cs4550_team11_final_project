@@ -1,17 +1,29 @@
 import React from "react";
-
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
-import {addComment, cancelComment, saveComment, updateDiscussion} from "../../actions/discussionActions";
+import {
+    addComment,
+    cancelComment,
+    findAllDiscussionsForTopic,
+    saveComment,
+    updateDiscussion
+} from "../../actions/discussionActions";
+import discussionService  from "../../services/DiscussionService";
 
 class ConversationsComponent extends React.Component{
 
     state = {
-        id: "",
-        title: "",
-        topic:"",
         body:"",
-        user:"Anonymus"
+        title: "",
+    }
+
+    componentDidMount() {
+        this.props.findDiscussionsForTopic(this.props.topicId)
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.topicId !== this.props.topicId) {
+            this.props.findDiscussionsForTopic(this.props.topicId)
+        }
     }
 
     render() {
@@ -22,9 +34,6 @@ class ConversationsComponent extends React.Component{
                         <h4 className="d-inline">DISCUSSIONS FOR TOPIC</h4>
                         <button type="button" className="btn btn-primary float-right"
                                 onClick={() => {
-                                    this.setState(prevState => ({
-                                        topic: this.props.topicId
-                                    }))
                                     this.props.addingComment()
                                 }}
                         >Add Comment</button>
@@ -62,16 +71,14 @@ class ConversationsComponent extends React.Component{
                         </form>
                         <button type="button" className="btn btn-success"
                                 onClick={() => {
-                                    this.props.saveComment(this.state)
-                                }}>
-                            Save</button>
+                                    this.props.saveComment(this.props.topicId, this.state)
+                                }}>Save</button>
                         <button type="button" className="btn btn-danger"
                                 onClick={this.props.cancelComment}>Cancel</button>
                     </a>
                     }
                     {
-                        this.props.discussions && this.props.discussions.discussions.map(discussion =>
-                            discussion.topic === this.props.topicId &&
+                        this.props.discussions.discussions && this.props.discussions.discussions.map(discussion =>
                             <a href="#"
                                className="list-group-item list-group-item-action flex-column align-items-start">
                                 <div className="d-flex w-100 justify-content-between">
@@ -82,7 +89,6 @@ class ConversationsComponent extends React.Component{
                                 <small>By {discussion.user}</small>
                             </a>
                         )
-
                     }
 
                 </div>
@@ -108,13 +114,20 @@ const dispatchToPropertyMapper = (dispatch) => {
         addingComment: () => {
             dispatch(addComment())
         },
-        saveComment: (discussion) => {
+
+        saveComment: (topicId, discussion) => {
+            discussionService.createDiscussion(topicId, discussion)
             dispatch(saveComment(discussion))
         },
+
         cancelComment: () => {
             dispatch(cancelComment())
-        }
+        },
 
+        findDiscussionsForTopic: (topicId) => {
+            discussionService.findDiscussionsForTopic(topicId)
+                .then(actualDiscussions => dispatch(findAllDiscussionsForTopic(actualDiscussions)))
+        }
 
 
     }
