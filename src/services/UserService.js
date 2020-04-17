@@ -52,6 +52,22 @@ export const findEventsForUser = () =>
         credentials: "include"
     }).then(response => response.json())
 
+export const findEventIdsForUser = () =>
+    fetch(`http://localhost:8080/users/events/ids`, {
+        method: 'GET',
+        credentials: "include"
+    }).then(response => response.json())
+
+export const deleteEventForUser = (event) =>
+    fetch(`http://localhost:8080/users/events/`, {
+        method: 'DELETE',
+        body: JSON.stringify(event),
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: "include"
+    }).then(response => response.json())
+
 
 
 // export const logout = () =>

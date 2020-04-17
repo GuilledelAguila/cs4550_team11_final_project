@@ -51,7 +51,7 @@ export default class SignUpComponent extends React.Component{
                                     })}
                                     className="form-control wbdv-field wbdv-name"
                                     id="nameFld"
-                                    placeholder="Introduce your name"/>
+                                    placeholder="Alice"/>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -66,7 +66,7 @@ export default class SignUpComponent extends React.Component{
 
                                     className="form-control wbdv-field wbdv-lastname"
                                     id="lastNameFld"
-                                    placeholder="Introduce your last name"/>
+                                    placeholder="Wonderland"/>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -96,7 +96,7 @@ export default class SignUpComponent extends React.Component{
                                     })}
                                     className="form-control wbdv-field wbdv-email"
                                     id="lastNameFld"
-                                    placeholder="Introduce your husky email"/>
+                                    placeholder="alicewonderland@husky.neu.edu"/>
                             </div>
                         </div>
 

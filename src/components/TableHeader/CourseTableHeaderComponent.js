@@ -7,7 +7,7 @@ const CourseTableHeaderComponent = () =>
         <Route path={["/course-manager", "/course-manager/table"]}
                exact={true}
                render={() =>
-                   <tr className = "table">
+                   <tr className = "table table-header">
                        <th className="wbdv-header wbdv-title" scope="col">Title
                            <button className="btn">
                                <i className="fas fa-sort-up"></i>

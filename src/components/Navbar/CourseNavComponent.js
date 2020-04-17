@@ -32,11 +32,10 @@ class CourseNavComponent extends React.Component {
     render() {
         return(
             <React.Fragment>
-                <nav className="navbar navbar-expand-lg">
+                <nav className="navbar navbar-expand-lg back">
                     <div className="col-3">
                         <div className="row">
                             <div className="col-2">
-                                <i className="fa fa-bars wbdv-hamburger fa-2x"></i>
                             </div>
                             <div className="collapse navbar-collapse col-10">
                                 <label className="wbdv-label wbdv-course-manager">
@@ -55,16 +54,17 @@ class CourseNavComponent extends React.Component {
                             }
                             }
                             value={this.state.courseId}
-                            placeholder="New Course Title"
+                            placeholder="Search Course ID"
                             id="wbdv-new-course"/>
                     </div>
                     <div className="col-3">
-                        <button onClick= {() => this.props.findCourseById(this.state.courseId)} className="btn  text wbdv-button wbdv-add-course">
+                        <button onClick= {() => this.props.findCourseById(this.state.courseId)}
+                                className="btn  text wbdv-button wbdv-add-course">
                             Find Course
                         </button>
                         {this.props.user && <button
                             onClick={this.logout}
-                            className="btn btn-danger logout float-right">Logout</button>}
+                            className="btn btn-warning logout float-right">Logout</button>}
 
                         {this.props.user.userType === "ADMIN" &&
                         <Link to={`/course-manager/admin`} className="btn btn-success float-right">

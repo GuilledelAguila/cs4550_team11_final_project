@@ -8,7 +8,7 @@ export const save = (event) =>
             'content-type': 'application/json'
         },
         credentials: "include"
-    }).then(response => console.log(response))
+    }).then(response => response.json())
 
 export default {
     save

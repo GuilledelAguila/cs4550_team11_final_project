@@ -17,8 +17,8 @@ class CourseManagerContainer extends React.Component {
                     {...this.props}
                 />
                 
-                <table className="table table-hover">
-                    <thead>
+                <table className="table table-hover ">
+                    <thead className="table-header">
                     <CourseTableHeaderComponent/>
                     </thead>
                 

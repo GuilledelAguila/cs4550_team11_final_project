@@ -56,8 +56,8 @@ class InstructorComponent extends React.Component{
             <div className="container-fluid instructor text-left">
                 <div className="row space-left">
                     <Link className="white"to={`/course-manager`}>
-                        <i className="white fas fa-arrow-left fa-2x"></i>
-                    </Link>
+                    <i className="white fas fa-arrow-left fa-2x"></i>
+                </Link>
                     <h1 className="white">{this.state.course.id} {this.state.course.name}</h1>
                 </div>
                 <div className="row space-bottom space-left">

@@ -87,7 +87,7 @@ import {Link} from "react-router-dom";
                                             </button>
                                             : <button
                                                 onClick={() => this.unvalidate(user.id)}
-                                                className="btn btn-warning float-right">Unvalidate
+                                                className="btn btn-warning float-right">Reject
                                             </button>
                                         }
 
