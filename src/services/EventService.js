@@ -1,4 +1,4 @@
-import {findAllTopics, findTopicsForCourse} from "./TopicService";
+
 
 export const save = (event) =>
     fetch(`http://localhost:8080/users/events/`, {
@@ -10,6 +10,25 @@ export const save = (event) =>
         credentials: "include"
     }).then(response => response.json())
 
+
+export const postEventForCourse = (event, courseId) =>
+    fetch(`http://localhost:8080/api/courses/${courseId}/events`, {
+        method: 'POST',
+        body: JSON.stringify(event),
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: "include"
+    }).then(response => response.json())
+
+export const findEventsForCourse = (courseId) => {
+    return fetch(`http://localhost:8080/api/courses/${courseId}/events`)
+        .then(response => response.json())
+}
+
+
 export default {
-    save
+    save,
+    postEventForCourse,
+    findEventsForCourse
 }
