@@ -15,15 +15,18 @@ import topicsReducer from "../../reducers/topicReducer";
 import discussionReducer from "../../reducers/discussionReducer";
 import userReducer from "../../reducers/userReducer";
 import {Provider} from "react-redux";
-import EventsSearchComponent from "../../components/Events/eventsSearchComponent";
-import EventDetailsComponent from "../../components/Events/eventsDetailsComponent";
+import EventsSearchComponent from "../../components/Events/EventsSearchComponent";
+import EventDetailsComponent from "../../components/Events/EventsDetailsComponent";
+import PostEventComponent from "../../components/Events/PostEventComponent";
+import eventsReducer from "../../reducers/eventsReducer";
 
 
 const rootReducer = combineReducers({
     courses: coursesReducer,
     topics: topicsReducer,
     discussions: discussionReducer,
-    user: userReducer
+    user: userReducer,
+    events: eventsReducer
 })
 
 const store = createStore(rootReducer);
@@ -116,6 +119,15 @@ class HomePageContainer extends React.Component {
                     exact={true}
                     component={EventDetailsComponent}/>
 
+                <Route
+                    path={`/course-manager/course/:courseId/postEvent`}
+                    exact={true}
+                    render={(props) =>
+                        <PostEventComponent
+                            {...props}
+                            courseId={props.match.params.courseId}
+                        />
+                    }/>
             </Router>
             </Provider>
         )

@@ -1,6 +1,6 @@
 import React from "react";
-import EventsSearchComponent from "./eventsSearchComponent";
-import EventDetailsComponent from "./eventsDetailsComponent"
+import EventsSearchComponent from "./EventsSearchComponent";
+import EventDetailsComponent from "./EventsDetailsComponent"
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 
 export default class EventsComponent extends React.Component{

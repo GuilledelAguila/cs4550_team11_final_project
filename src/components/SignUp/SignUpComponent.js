@@ -43,7 +43,7 @@ export default class SignUpComponent extends React.Component{
                         <div className="form-group row">
                             <label htmlFor="nameFld" className="col-sm-2 col-form-label">
                                 Name </label>
-                            <div className="col-sm-10 ">
+                            <div className="col-sm-10">
                                 <input
                                     value={this.state.name}
                                     onChange={(e) => this.setState({

@@ -73,7 +73,7 @@ class InstructorComponent extends React.Component{
                             <div className="col-2">
                                 {
                                     this.state.user.userType === 'FACULTY' &&
-                                        <div>
+                                        <div className="row">
                                             {
                                                 this.state.editingBriefDescription === false &&
                                                 <button className="btn hidden wbdv-row wbdv-button wbdv-edit white"
@@ -89,7 +89,15 @@ class InstructorComponent extends React.Component{
                                                 </button>
 
                                             }
-                                        </div>
+                                            {
+                                                this.state.user.userType === 'FACULTY' &&
+                                                <button className="btn-events">
+                                                    <Link to={`/course-manager/course/${this.state.course.id}/postEvent`}>
+                                                        Add Events
+                                                    </Link>
+                                                </button>
+                                            }
+                                    </div>
                                 }
                             </div>
                         </div>

@@ -29,7 +29,16 @@ export const login = (user) =>
             'content-type': 'application/json'
         },
         credentials: "include"
-    }).then(response => response.json())
+    }).then(function(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }).then(function(response) {
+        return response.json();
+    }).catch(function(error) {
+        console.log(error);
+    });
 
 export const findUsersToValidate = () =>
     fetch(`http://localhost:8080/users/faculty/validate`).then(response => response.json())
