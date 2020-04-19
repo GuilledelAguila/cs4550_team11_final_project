@@ -4,13 +4,21 @@ import ConversationsComponent from "./ConversationsComponent";
 import TopicsComponent from "./TopicsComponent";
 import {connect} from "react-redux";
 import courseService from '../../services/CourseService'
-
+import {findCourseById} from "../../services/CourseService";
+import EventsSearchComponent from "../Events/EventsSearchComponent";
 
 
 class CoursePageComponent extends React.Component{
 
     componentDidMount() {
+        findCourseById(this.props.courseId)
+            .then(actualCourse => this.setState({
+                courseName: actualCourse.name
+            }))
+
     }
+
+    state ={}
 
     render() {
         return(
@@ -22,12 +30,24 @@ class CoursePageComponent extends React.Component{
                         <div className="row">
                             <TopicsComponent
                                 courseId = {this.props.courseId}
+                                courseName = {this.state.courseName}
                             />
-                            <ConversationsComponent
-                                courseId = {this.props.courseId}
-                                topicId = {this.props.topicId}/>
+
+                            {
+                                this.props.topicId !== "events"
+                                ? <ConversationsComponent
+                                        courseId = {this.props.courseId}
+                                        topicId = {this.props.topicId}/>
+
+                                : <EventsSearchComponent
+                                courseName = {this.state.courseName}
+                                courseId = {this.props.courseId}/>
+                            }
+
+
                         </div>
                     </div>
+                    <br/>
                 </div>
         )
     }

@@ -1,3 +1,43 @@
-.black {
-    color: black;
+.post-event-page{
+    background-color: firebrick;
+    position: absolute;
+    width: 100%;
+    height: 100%
+}
+
+.white {
+    color: white;
+}
+
+.container-form-event {
+    padding: 30px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 3px;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 800px;
+}
+
+.render-events {
+    padding: 30px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 3px;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 800px;
+}
+
+.event {
+    margin-left: 20px;
+    margin-right: 20px;
 }

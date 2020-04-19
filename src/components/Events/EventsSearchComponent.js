@@ -6,14 +6,7 @@ import {findEventIdsForUser, profile, deleteEventForUser} from "../../services/U
 export default class EventsSearchComponent extends React.Component{
 
     componentDidMount() {
-        let searchLocation = this.props.match.params.searchLocation;
-        if(!searchLocation)
-            searchLocation='USA'
-        fetch(`/api/event/search?location=${searchLocation}`)
-            .then(response => response.json())
-            .then(result => this.setState({
-                events: result.events && result.events.event
-            }))
+        this.props.courseName && this.searchEvents(this.props.courseName)
         profile()
             .then(profile => {
                 if(profile.status === 500) this.props.history.push("/")
@@ -31,14 +24,29 @@ export default class EventsSearchComponent extends React.Component{
 
     }
 
-    searchEvents = (searchLocation) => {
-        this.props.history.push(`/course-manager/course/${this.props.match.params.courseId}/event/search/${searchLocation}`)
-        fetch(`/api/event/search?location=${searchLocation}`)
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+        if(prevProps.courseName !== this.props.courseName){
+            this.props.courseName && this.searchEvents(this.props.courseName)
+        }
+    }
+
+    searchEvents = (keywords) => {
+        fetch(`/api/event/search?keywords=${keywords}`)
             .then(response => response.json())
             .then(result => this.setState({
                 events: result.events && result.events.event
             }))
     }
+
+    // getEventDetails = (keywords) => {
+    //     this.props.history.push(`/course-manager/course/${this.props.courseId}/event/search/${searchLocation}`)
+    //     fetch(`/api/event/search?location=${searchLocation}&date=Future&q=computer`)
+    //         .then(response => response.json())
+    //         .then(result => this.setState({
+    //             events: result.events && result.events.event
+    //         }))
+    // }
 
     save = (event) =>
         save(event)
@@ -64,29 +72,29 @@ export default class EventsSearchComponent extends React.Component{
 
     render() {
         return(
-            <div className="container">
+            <div className="col-9">
                 <br/>
-                <Link to={`/course-manager`}>
-                    <i className="fas  fa-arrow-left"/>
-                </Link>
-                <h2>
-                    Search Events
-                </h2>
-                <input
-                    className={`form-control`}
-                    onChange={e => this.setState({searchLocation: e.target.value})}
-                    value={this.state.searchLocation}
-                    placeholder="Search by Location"
-                />
-                <button className={`btn btn-primary btn-block`} onClick={() => this.searchEvents(this.state.searchLocation)}>
-                    Search For Events
-                </button>
+                {/*<input*/}
+                {/*    className={`form-control`}*/}
+                {/*    onChange={e => this.setState({searchLocation: e.target.value})}*/}
+                {/*    value={this.state.searchLocation}*/}
+                {/*    placeholder="Search by Location"*/}
+                {/*/>*/}
+                {/*<button className={`btn btn-primary btn-block`} onClick={() => this.searchEvents(this.state.searchLocation)}>*/}
+                {/*    Search For Events*/}
+                {/*</button>*/}
                 <ul className={`list-group`}>
+                    <li className={`list-group-item background-brown white`} key="title">
+                        <h4>Events related to {this.props.courseName}</h4>
+                    </li>
                     {
-                        this.state.events && this.state.events.map((event, i) =>
+                        this.state.events && this.state.events.length !== 0
+
+                            ? this.state.events.map((event, i) =>
                             <li className={`list-group-item`} key={i}>
-                                <Link to={`/course-manager/course/${this.props.match.params.courseId}/event/${event.id}`}>
-                                    {event.title} {event.city_name}
+                                <Link to={`/course-manager/course/${this.props.courseId}/event/${event.id}`}>
+                                    {event.title}
+                                    {console.log(event)}
                                 </Link>
                                 {this.state.userEventIds.includes(event.id)
                                     ? <button
@@ -103,10 +111,17 @@ export default class EventsSearchComponent extends React.Component{
                                     </button>
 
                                 }
+                                <div>
+                                    <small>Date: {event.start_time}</small>
+                                </div>
+
+
 
                             </li>
-                        )
+                            )
+                            : <h3>LOADING...</h3>
                     }
+
                     {
                         !this.state.events && <h4>
                             Ooops no events found in {this.props.match.params.searchLocation} :(

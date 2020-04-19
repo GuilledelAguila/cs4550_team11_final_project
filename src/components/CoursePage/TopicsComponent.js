@@ -18,7 +18,7 @@ class  TopicsComponent extends React.Component {
                         <text className="list-group-item">
                             <h4>CONVERSATION TOPICS</h4>
                         </text>
-                        <Link to={`/course-manager/course/${this.props.courseId}/event`}
+                        <Link to={`/course-manager/course/${this.props.courseId}/topic/events`}
                               className="list-group-item list-group-item-action">
                             Events
                         </Link>

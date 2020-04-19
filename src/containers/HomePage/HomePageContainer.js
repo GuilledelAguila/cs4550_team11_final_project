@@ -104,15 +104,6 @@ class HomePageContainer extends React.Component {
                            />
                        }/>
 
-                <Route
-                    path={`/course-manager/course/:courseId/event`}
-                    exact={true}
-                    component={EventsSearchComponent}/>
-
-                <Route
-                    path={`/course-manager/course/:courseId/event/search/:searchLocation`}
-                    exact={true}
-                    component={EventsSearchComponent}/>
 
                 <Route
                     path={`/course-manager/course/:courseId/event/:eventID`}

@@ -42,32 +42,42 @@ class ProfileComponent extends React.Component {
 
     render() {
         return(
-            <div className="container">
-                <h1>HELLO {this.props.user.name}!</h1>
-                <ul className="list-group">
-                    <li className="list-group-item active" key="aa">Your details:</li>
-                    <li className="list-group-item" key={this.props.user.name} >Name: {this.props.user.name}</li>
-                    <li className="list-group-item" key={this.props.user.lastName}>Last name: {this.props.user.lastName}</li>
-                    <li className="list-group-item" key={this.props.user.userType}>Type: {this.props.user.userType}</li>
-                    <li className="list-group-item" key={this.props.user.email}>Email: {this.props.user.email}</li>
-                    <li className="list-group-item active" key="events">Your Events:</li>
-                    {this.state.events && this.state.events.map(event =>
-                        <li className="list-group-item" key={event.title}>{event.title}
-                            <button
-                                className="btn btn-danger float-right"
-                                onClick={() =>{ this.delete({id: event.id , title: event.title})
-                                }}>
-                                Remove
-                            </button>
-
+            <div>
+            <div className="container-fluid">
+                <h1>
+                    <Link to={"/course-manager"}>
+                        <button className="btn btn-primary h1 float-left">Back</button>
+                    </Link>
+                    HELLO {this.props.user.name}!
+                </h1>
+            </div>
+                <div className="container">
+                    <ul className="list-group">
+                        <li className="list-group-item background-brown white" key="aa">
+                            <h4>Your details:</h4>
                         </li>
-                    )}
-                </ul>
+                        <li className="list-group-item" key={this.props.user.name} >Name: {this.props.user.name}</li>
+                        <li className="list-group-item" key={this.props.user.lastName}>Last name: {this.props.user.lastName}</li>
+                        <li className="list-group-item" key={this.props.user.userType}>Type: {this.props.user.userType}</li>
+                        <li className="list-group-item" key={this.props.user.email}>Email: {this.props.user.email}</li>
+                        <li className="list-group-item background-brown white" key="events">
+                            <h4>Your Events:</h4>
+                        </li>
+                        {this.state.events && this.state.events.map(event =>
+                            <li className="list-group-item" key={event.title}>{event.title}
+                                <button
+                                    className="btn btn-danger float-right"
+                                    onClick={() =>{ this.delete({id: event.id , title: event.title})
+                                    }}>
+                                    Remove
+                                </button>
 
+                            </li>
+                        )}
+                    </ul>
+                </div>
                 <br/>
-                <Link to={"/course-manager"}>
-                    <button className="btn btn-primary h1 float-right">Exit</button>
-                </Link>
+
             </div>
 
 

@@ -32,14 +32,14 @@ class CourseNavComponent extends React.Component {
     render() {
         return(
             <React.Fragment>
-                <nav className="navbar navbar-expand-lg back">
+                <nav className="navbar navbar-expand-lg background-brown">
                     <div className="col-3">
                         <div className="row">
                             <div className="col-2">
                             </div>
                             <div className="collapse navbar-collapse col-10">
                                 <label className="wbdv-label wbdv-course-manager">
-                                    Course Manager</label>
+                                    Course Finder</label>
                             </div>
                         </div>
                     </div>
