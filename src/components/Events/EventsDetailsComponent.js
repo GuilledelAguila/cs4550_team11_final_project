@@ -1,17 +1,27 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import eventService from "../../services/EventService"
 
 
 export default class EventsDetailsComponent extends React.Component {
 
     componentDidMount() {
         let eventID = this.props.match.params.eventID;
-        fetch(`/api/searchbyid?id=${eventID}`)
-            .then(response => response.json())
-            .then(result => this.setState({
-                event: result,
-                images: result.images,
-            }))
+        eventService.findEventById(eventID)
+            .then(response => {
+                if(response === "ERROR"){
+                    fetch(`/api/searchbyid?id=${eventID}`)
+                        .then(response => response.json())
+                        .then(result => this.setState({
+                            event: result,
+                            images: result.images,
+                        }))
+                } else {
+                    this.setState({
+                        event: response
+                    })
+                }
+            })
     }
 
     state = {
@@ -39,11 +49,17 @@ export default class EventsDetailsComponent extends React.Component {
                         </li>
                         <li className="list-group-item">Owner: {this.state.event.owner}</li>
                         <li className="list-group-item">Location: {this.state.event.address}</li>
-                        <li className="list-group-item">Venue: {this.state.event.venue_name}</li>
-                        <a className="list-group-item"
-                            href={this.state.event.url}>
-                            More Info
-                        </a>
+
+                        {
+                            this.state.event.owner !== 'INSTRUCTOR' &&
+                                <React.Fragment>
+                                    <li className="list-group-item">Venue: {this.state.event.venue_name}</li>
+                                    <a className="list-group-item"
+                                       href={this.state.event.url}>
+                                        More Info
+                                    </a>
+                                </React.Fragment>
+                        }
                         <li className="list-group-item">Date: {this.state.event.start_time}</li>
 
                         <li className="list-group-item background-brown white">

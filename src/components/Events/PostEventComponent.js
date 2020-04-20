@@ -12,8 +12,8 @@ class PostEventComponent extends React.Component {
 
     state = {
         title: '',
-        location: '',
-        date: '',
+        address: '',
+        start_time: '',
         description: ''
     }
 
@@ -57,7 +57,7 @@ class PostEventComponent extends React.Component {
                                placeholder="Hurting Hall 310"
                                onChange={(e) =>
                                    this.setState({
-                                       location: e.target.value
+                                       address: e.target.value
                                    })
                                }
                            />
@@ -73,7 +73,7 @@ class PostEventComponent extends React.Component {
                                placeholder="Monday, April 10"
                                onChange={(e) =>
                                    this.setState({
-                                       date: e.target.value
+                                       start_time: e.target.value
                                    })
                                }
                            />
