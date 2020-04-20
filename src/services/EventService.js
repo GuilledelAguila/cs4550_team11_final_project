@@ -48,6 +48,7 @@ export const findEventsForCourse = (courseId) => {
 }
 
 export const findEventById = (eventId) => {
+
     return fetch(`http://localhost:8080/api/events/${eventId}`)
         .then(function(response) {
             if (!response.ok) {

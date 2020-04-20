@@ -27,24 +27,35 @@ class EventsSearchComponent extends React.Component{
     componentDidMount() {
 
         this.props.findEventsForCourse(this.props.courseId);
-
-
-        if(this.props.user){
+        if(this.props.user.id){
             this.props.courseName && this.searchEvents(this.props.courseName) &&
                 this.setState({
                     user: this.props.user
-                }).then(status => findEventIdsForUser(this.state.user.id)
+                })
+            findEventIdsForUser(this.props.user)
                     .then(events => {
                         this.setState({
                             userEventIds: events
                         })
-                    }))
+                    })
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.courseName !== this.props.courseName){
             this.props.courseName && this.searchEvents(this.props.courseName)
+            if(this.props.user.id){
+                this.props.courseName && this.searchEvents(this.props.courseName) &&
+                this.setState({
+                    user: this.props.user
+                })
+                findEventIdsForUser(this.props.user)
+                    .then(events => {
+                        this.setState({
+                            userEventIds: events
+                        })
+                    })
+            }
         }
     }
 
@@ -58,9 +69,9 @@ class EventsSearchComponent extends React.Component{
 
     save = (event) =>
         save(event)
-            .then(eventIds =>
-                console.log(eventIds)
-                )
+            .then(eventIds => this.setState({
+                    userEventIds: eventIds
+                }))
 
     delete = (event) =>
         deleteEventForUser(event)
@@ -76,22 +87,13 @@ class EventsSearchComponent extends React.Component{
         return(
             <div className="col-9">
                 <br/>
-                {/*<input*/}
-                {/*    className={`form-control`}*/}
-                {/*    onChange={e => this.setState({searchLocation: e.target.value})}*/}
-                {/*    value={this.state.searchLocation}*/}
-                {/*    placeholder="Search by Location"*/}
-                {/*/>*/}
-                {/*<button className={`btn btn-primary btn-block`} onClick={() => this.searchEvents(this.state.searchLocation)}>*/}
-                {/*    Search For Events*/}
-                {/*</button>*/}
                 <ul className={`list-group`}>
                     <li className={`list-group-item background-brown white`} key="instructorTitle">
                         <h4>Events posted by instructor</h4>
                     </li>
                     {
                         this.props.instructorEvents && this.props.instructorEvents.map((iEvent, index) =>
-                        <li className={"list-group-item"}>
+                        <li className={"list-group-item"} key={iEvent.id}>
                             <Link to={`/course-manager/course/${this.props.courseId}/topic/event/${iEvent.id}`}>
                             <label>{iEvent.title}</label>
                             </Link>
@@ -113,8 +115,7 @@ class EventsSearchComponent extends React.Component{
                                             start_time: iEvent.start_time,
                                             owner: 'INSTRUCTOR',
                                             description: iEvent.description,
-                                            course: 'CS3500'
-                                        })
+                                            })
                                         }}>
                                         Save
                                     </button>
@@ -137,7 +138,7 @@ class EventsSearchComponent extends React.Component{
                         this.state.events && this.state.events.length !== 0
 
                             ? this.state.events.map((event, i) =>
-                            <li className={`list-group-item`} key={i}>
+                            <li className={`list-group-item`} key={event.id}>
                                 <Link to={`/course-manager/course/${this.props.courseId}/topic/event/${event.id}`}>
                                     {event.title}
                                 </Link>

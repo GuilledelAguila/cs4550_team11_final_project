@@ -15,7 +15,6 @@ export default class LogInComponent extends React.Component {
     login = (user) =>
         login(user)
             .then(currentUser => {
-                console.log(currentUser)
                 if(currentUser) {
                         if(currentUser.validated === false && currentUser.userType === "FACULTY") {
                             this.props.history.push('/await')
@@ -69,19 +68,23 @@ export default class LogInComponent extends React.Component {
                         <div className="form-group row">
                             <label className="col-sm-2 col-form-label"> </label>
                             <div className="col-sm-10">
-
-                                    <button
-                                        onClick={() => this.login(this.state)}
-                                        className="btn btn-outline-danger btn-block wbdv-login">Log in</button>
+                                <button
+                                    onClick={() => this.login(this.state)}
+                                    className="btn btn-outline-danger btn-block wbdv-login">
+                                    Log in
+                                </button>
+                                <br/>
+                                <br/>
+                                <div>
+                                    <span> Don't have an account yet? </span>
+                                    <span/>
+                                    <Link to={`/signup`}>
+                                        Sign up
+                                    </Link>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <span> Don't have an account yet? </span>
-                            <span/>
-                            <Link to={`/signup`}>
-                                Sign up
-                            </Link>
-                        </div>
+
                     </div>
                 </div>
             </React.Fragment>

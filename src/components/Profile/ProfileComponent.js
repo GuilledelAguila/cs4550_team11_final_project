@@ -53,15 +53,15 @@ class ProfileComponent extends React.Component {
                         <li className="list-group-item background-brown white" key="aa">
                             <h4>Your details:</h4>
                         </li>
-                        <li className="list-group-item" key={this.props.user.name} >Name: {this.props.user.name}</li>
-                        <li className="list-group-item" key={this.props.user.lastName}>Last name: {this.props.user.lastName}</li>
-                        <li className="list-group-item" key={this.props.user.userType}>Type: {this.props.user.userType}</li>
-                        <li className="list-group-item" key={this.props.user.email}>Email: {this.props.user.email}</li>
+                        <li className="list-group-item" key={1} >Name: {this.props.user.name}</li>
+                        <li className="list-group-item" key={2}>Last name: {this.props.user.lastName}</li>
+                        <li className="list-group-item" key={3}>Type: {this.props.user.userType}</li>
+                        <li className="list-group-item" key={4}>Email: {this.props.user.email}</li>
                         <li className="list-group-item background-brown white" key="events">
                             <h4>Your Events:</h4>
                         </li>
                         {this.state.events && this.state.events.map(event =>
-                            <li className="list-group-item" key={event.title}>{event.title}
+                            <li className="list-group-item" key={event.id}>{event.title}
                                 <button
                                     className="btn btn-danger float-right"
                                     onClick={() =>{ this.delete({id: event.id , title: event.title})

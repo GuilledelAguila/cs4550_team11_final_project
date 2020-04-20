@@ -6,10 +6,10 @@ import eventService from "../../services/EventService"
 export default class EventsDetailsComponent extends React.Component {
 
     componentDidMount() {
-        let eventID = this.props.match.params.eventID;
+        let eventID = this.props.match.params.eventId;
         eventService.findEventById(eventID)
             .then(response => {
-                if(response === "ERROR"){
+                if(response === "ERROR" || response.owner !== "INSTRUCTOR"){
                     fetch(`/api/searchbyid?id=${eventID}`)
                         .then(response => response.json())
                         .then(result => this.setState({

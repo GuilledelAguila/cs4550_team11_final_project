@@ -127,7 +127,7 @@ class PostEventComponent extends React.Component {
                    {
                        this.props.events && this.props.events.map(event =>
                            <div className="list-group">
-                               <li className={"list-group-item"}>{event.title}</li>
+                               <li className={"list-group-item"} key={event.id}>{event.title}</li>
                            </div>
                        )
                    }

@@ -137,22 +137,23 @@ export default class SignUpComponent extends React.Component{
                         <div className="form-group row">
                             <label className="col-sm-2 col-form-label"> </label>
                             <div className="col-sm-10">
-
-                                    <button
-                                        onClick={() => this.register(this.state)}
-                                        id="registerBtn"
-                                        className="btn btn-outline-danger btn-block">Create Account
-                                    </button>
-
+                                <button
+                                    onClick={() => this.register(this.state)}
+                                    id="registerBtn"
+                                    className="btn btn-outline-danger btn-block">Create Account
+                                </button>
+                                <br/>
+                                <br/>
+                                <div>
+                                    <span> Already have an account? </span>
+                                    <span/>
+                                    <Link to={`/login`}>
+                                        Login
+                                    </Link>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <span> Already have an account? </span>
-                            <span/>
-                            <Link to={`/login`}>
-                                Login
-                            </Link>
-                        </div>
+
                     </div>
                 </div>
             </React.Fragment>
