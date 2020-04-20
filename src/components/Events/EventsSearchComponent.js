@@ -38,7 +38,6 @@ class EventsSearchComponent extends React.Component{
                         this.setState({
                             userEventIds: events
                         })
-
                     }))
         }
     }
@@ -59,9 +58,8 @@ class EventsSearchComponent extends React.Component{
 
     save = (event) =>
         save(event)
-            .then(eventIds => this.setState({
-                    userEventIds: eventIds
-                    })
+            .then(eventIds =>
+                console.log(eventIds)
                 )
 
     delete = (event) =>
@@ -97,6 +95,31 @@ class EventsSearchComponent extends React.Component{
                             <Link to={`/course-manager/course/${this.props.courseId}/topic/event/${iEvent.id}`}>
                             <label>{iEvent.title}</label>
                             </Link>
+
+                            {
+                                this.state.userEventIds.includes(iEvent.id)
+                                    ? <button
+                                        className="btn btn-danger float-right"
+                                        onClick={() =>{ this.delete({id: iEvent.id , title: iEvent.title})
+                                        }}>
+                                        Remove
+                                    </button>
+                                    : <button
+                                        className="btn btn-success float-right"
+                                        onClick={() =>{ this.save({
+                                            id: iEvent.id ,
+                                            title: iEvent.title,
+                                            address: iEvent.address,
+                                            start_time: iEvent.start_time,
+                                            owner: 'INSTRUCTOR',
+                                            description: iEvent.description,
+                                            course: 'CS3500'
+                                        })
+                                        }}>
+                                        Save
+                                    </button>
+                            }
+
                         </li>
                         )
                     }
@@ -118,7 +141,8 @@ class EventsSearchComponent extends React.Component{
                                 <Link to={`/course-manager/course/${this.props.courseId}/topic/event/${event.id}`}>
                                     {event.title}
                                 </Link>
-                                {this.state.userEventIds.includes(event.id)
+                                {
+                                    this.state.userEventIds.includes(event.id)
                                     ? <button
                                         className="btn btn-danger float-right"
                                         onClick={() =>{ this.delete({id: event.id , title: event.title})
@@ -152,7 +176,6 @@ class EventsSearchComponent extends React.Component{
 }
 
 const stateToPropertyMapper = (state) => {
-    console.log(state.events.events)
     return {
         instructorEvents: state.events.events
     }
