@@ -20,9 +20,9 @@ class CoursePageComponent extends React.Component{
                 ? (
                     this.props.setUser(profile),
                     findCourseById(this.props.courseId)
-                    .then(actualCourse => this.setState({
-                        courseName: actualCourse.name
-                    }))
+                        .then(actualCourse => this.setState({
+                            courseName: actualCourse.name
+                        }))
                 )
                 : this.props.history.push("/")
             )
@@ -46,16 +46,17 @@ class CoursePageComponent extends React.Component{
                             />
 
                             {
-                                this.props.topicId !== "events"
-                                ? <ConversationsComponent
-                                        user = {this.props.user}
-                                        courseId = {this.props.courseId}
-                                        topicId = {this.props.topicId}/>
+                                this.props.topicId && this.props.topicId !== "events"
+                                        ? <ConversationsComponent
+                                            user={this.props.user}
+                                            courseId={this.props.courseId}
+                                            topicId={this.props.topicId}/>
 
-                                : <EventsSearchComponent
-                                        user = {this.props.user}
-                                        courseName = {this.state.courseName}
-                                        courseId = {this.props.courseId}/>
+                                        : <EventsSearchComponent
+                                            user={this.props.user}
+                                            courseName={this.state.courseName}
+                                            courseId={this.props.courseId}/>
+
                             }
 
 

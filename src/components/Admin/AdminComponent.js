@@ -4,6 +4,7 @@ import {setUser, getUser} from "../../actions/userActions";
 import {connect} from "react-redux";
 import {findUsersToValidate, updateValidateFaculty, updateUnvalidateFaculty} from "../../services/UserService";
 import {Link} from "react-router-dom";
+import {findEventsForUser} from "../../services/EventService";
 
 
  class AdminComponent extends React.Component {
@@ -11,12 +12,18 @@ import {Link} from "react-router-dom";
      state ={};
 
      componentDidMount() {
-         findUsersToValidate().then(usersToValidate =>
-             this.setState({
-                usersToValidate
-             }))
          profile()
-             .then(profile => this.props.setUser(profile))
+             .then(profile => profile
+                 ? this.props.setUser(profile)
+                 : this.props.history.push("/")
+             )
+             .then(status => findUsersToValidate().then(usersToValidate =>
+                 this.setState({
+                     usersToValidate
+                 }))
+
+             )
+
      }
 
      validate = (userId) => {

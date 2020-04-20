@@ -6,25 +6,26 @@ import {findEventIdsForUser, deleteEventForUser} from "../../services/EventServi
 
 export default class EventsSearchComponent extends React.Component{
 
-    componentDidMount() {
+    state = {
+        events: [],
+        searchLocation: '',
+        userEventIds: [],
+        user: {}
+    }
 
+    componentDidMount() {
         if(this.props.user){
-            this.props.courseName && this.searchEvents(this.props.courseName)
-            try {
+            this.props.courseName && this.searchEvents(this.props.courseName) &&
                 this.setState({
                     user: this.props.user
-                })
-            } finally {
-                findEventIdsForUser(this.state.user.id)
+                }).then(status => findEventIdsForUser(this.state.user.id)
                     .then(events => {
                         this.setState({
                             userEventIds: events
                         })
-                    })
-            }
+
+                    }))
         }
-
-
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -56,12 +57,7 @@ export default class EventsSearchComponent extends React.Component{
             )
 
 
-    state = {
-        events: [],
-        searchLocation: '',
-        userEventIds: [],
-        user: {}
-    }
+
 
     render() {
         return(
