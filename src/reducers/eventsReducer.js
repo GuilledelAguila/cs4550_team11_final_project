@@ -1,10 +1,13 @@
 import {FIND_EVENTS, ADD_EVENT} from "../actions/eventActions";
 
 const events = [
-    {id: "0", title: "Grading"},
-    {id: "1", title: "Work Load"},
-    {id: "2", title: "Instructor"},
-    {id: "3", title: "Content"},
+    {
+        id: "0",
+        title: "Grading",
+        location: "Hall 123",
+        date: "Monday",
+        description:"brief description"
+    },
 ]
 
 const eventsReducer = (state = {events: events}, action) => {

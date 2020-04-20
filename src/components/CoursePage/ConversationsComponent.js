@@ -117,7 +117,7 @@ const dispatchToPropertyMapper = (dispatch) => {
 
         saveComment: (topicId, discussion) => {
             discussionService.createDiscussion(topicId, discussion)
-            dispatch(saveComment(discussion))
+                .then(discussion => dispatch(saveComment(discussion)))
         },
 
         cancelComment: () => {

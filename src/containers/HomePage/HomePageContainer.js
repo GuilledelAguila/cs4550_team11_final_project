@@ -106,7 +106,7 @@ class HomePageContainer extends React.Component {
 
 
                 <Route
-                    path={`/course-manager/course/:courseId/event/:eventID`}
+                    path={`/course-manager/course/:courseId/topic/event/:eventID`}
                     exact={true}
                     component={EventDetailsComponent}/>
 
