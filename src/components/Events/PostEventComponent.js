@@ -1,5 +1,5 @@
 import React from "react";
-import "./events.style.client.css"
+import "./Events.style.client.css"
 import eventService from "../../services/EventService"
 import {connect} from "react-redux";
 import discussionService from "../../services/DiscussionService";
