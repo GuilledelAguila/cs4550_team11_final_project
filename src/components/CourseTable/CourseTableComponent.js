@@ -15,14 +15,16 @@ class CourseTableComponent extends React.Component {
             <React.Fragment>
                 <tbody>
                 {
-                    this.props.courses && this.props.courses.map(function(course, index){
-                        return (
-                            <CourseRowComponent key={index}
-                                course={course}
-                                index={index}
-                            />
-                        )
-                    })
+                    this.props.courses && this.props.courses.length > 0
+                        ? this.props.courses.map(function(course, index){
+                            return (
+                                <CourseRowComponent key={index}
+                                    course={course}
+                                    index={index}
+                                />
+                            )
+                        })
+                        : <tr><td>OOPS, LOOKS LIKE NO COURSES WHERE FOUND</td></tr>
                 }
                 </tbody>
             </React.Fragment>

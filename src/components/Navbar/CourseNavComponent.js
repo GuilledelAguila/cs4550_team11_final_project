@@ -1,32 +1,20 @@
 import React from "react";
 import "./CourseNav.style.client.css"
-import courseService from "../../services/CourseService";
-import {findAllCourses, findCourseById} from "../../actions/courseActions";
+import {findCourseById} from "../../actions/courseActions";
 import {connect} from "react-redux";
-import {profile, logout} from "../../services/UserService";
+import {logout} from "../../services/UserService";
 import {setUser} from "../../actions/userActions";
 import {Link} from "react-router-dom";
+
 
 class CourseNavComponent extends React.Component {
 
     state = {
-        courseId: '',
-        profile: {
-            username: ''
-        }
+        courseId: ""
     }
 
     logout = () => logout()
         .then(status => this.props.history.push("/"))
-
-    componentDidMount() {
-        profile()
-            .then(profile => {
-                if(profile.status === 500) this.props.history.push("/")
-                else this.props.setUser(profile)
-            })
-
-    }
 
 
     render() {

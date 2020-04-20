@@ -1,6 +1,7 @@
 import React from "react";
 import "./SignUp.style.client.css"
 import {register} from "../../services/UserService";
+import {Link} from "react-router-dom";
 
 
 export default class SignUpComponent extends React.Component{
@@ -38,7 +39,12 @@ export default class SignUpComponent extends React.Component{
         return(
             <React.Fragment>
                 <div className="signup-page">
-                    <h1 className="white">Sign Up</h1>
+                    <div className="container-fluid">
+                        <Link to={`/`}>
+                            <button className="btn btn-primary h1 float-left">Back</button>
+                        </Link>
+                        <h1 className="h1-login">Sign Up</h1>
+                    </div>
                     <div className="container-login2">
                         <div className="form-group row">
                             <label htmlFor="nameFld" className="col-sm-2 col-form-label">
@@ -139,6 +145,13 @@ export default class SignUpComponent extends React.Component{
                                     </button>
 
                             </div>
+                        </div>
+                        <div>
+                            <span> Already have an account? </span>
+                            <span/>
+                            <Link to={`/login`}>
+                                Login
+                            </Link>
                         </div>
                     </div>
                 </div>

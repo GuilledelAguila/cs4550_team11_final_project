@@ -15,6 +15,7 @@ export default class LogInComponent extends React.Component {
     login = (user) =>
         login(user)
             .then(currentUser => {
+                console.log(currentUser)
                 if(currentUser) {
                         if(currentUser.validated === false && currentUser.userType === "FACULTY") {
                             this.props.history.push('/await')
@@ -29,7 +30,13 @@ export default class LogInComponent extends React.Component {
         return (
             <React.Fragment>
                 <div className="login-page">
-                    <h1 className="h1-login">Welcome to HuskyInfo</h1>
+                    <div className="container-fluid">
+                        <Link to={`/`}>
+                            <button className="btn btn-primary h1 float-left">Back</button>
+                        </Link>
+                        <h1 className="h1-login">Welcome to HuskyInfo</h1>
+
+                    </div>
                     <div className="container-login">
                         <div className="form-group row">
                             <label htmlFor="username" className="col-sm-2 col-form-label">
@@ -68,14 +75,14 @@ export default class LogInComponent extends React.Component {
                                         className="btn btn-outline-danger btn-block wbdv-login">Log in</button>
                             </div>
                         </div>
-                        <div className="link">
+                        <div>
+                            <span> Don't have an account yet? </span>
+                            <span/>
                             <Link to={`/signup`}>
                                 Sign up
                             </Link>
                         </div>
                     </div>
-
-
                 </div>
             </React.Fragment>
 

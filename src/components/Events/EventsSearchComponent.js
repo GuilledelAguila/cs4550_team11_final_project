@@ -16,27 +16,31 @@ import {findEvents} from "../../actions/eventActions";
 
 class EventsSearchComponent extends React.Component{
 
+    state = {
+        events: [],
+        searchLocation: '',
+        userEventIds: [],
+        user: {}
+    }
+
+
     componentDidMount() {
 
         this.props.findEventsForCourse(this.props.courseId);
 
+
         if(this.props.user){
-            this.props.courseName && this.searchEvents(this.props.courseName)
-            try {
+            this.props.courseName && this.searchEvents(this.props.courseName) &&
                 this.setState({
                     user: this.props.user
-                })
-            } finally {
-                findEventIdsForUser(this.state.user.id)
+                }).then(status => findEventIdsForUser(this.state.user.id)
                     .then(events => {
                         this.setState({
                             userEventIds: events
                         })
-                    })
-            }
+
+                    }))
         }
-
-
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -68,12 +72,7 @@ class EventsSearchComponent extends React.Component{
             )
 
 
-    state = {
-        events: [],
-        searchLocation: '',
-        userEventIds: [],
-        user: {}
-    }
+
 
     render() {
         return(
