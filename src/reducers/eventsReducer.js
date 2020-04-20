@@ -4,8 +4,8 @@ const events = [
     {
         id: "0",
         title: "Grading",
-        location: "Hall 123",
-        date: "Monday",
+        address: "Hall 123",
+        start_time: "Monday",
         description:"brief description"
     },
 ]

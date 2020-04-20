@@ -47,9 +47,24 @@ export const findEventsForCourse = (courseId) => {
         .then(response => response.json())
 }
 
+export const findEventById = (eventId) => {
+    return fetch(`http://localhost:8080/api/events/${eventId}`)
+        .then(function(response) {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response;
+        }).then(function(response) {
+            return response.json();
+        }).catch(function(error) {
+            return "ERROR";
+        });
+}
+
 
 export default {
     save,
     postEventForCourse,
-    findEventsForCourse
+    findEventsForCourse,
+    findEventById
 }
