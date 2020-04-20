@@ -30,14 +30,14 @@ class ConversationsComponent extends React.Component{
         return(
             <div className="col-9">
                 <div className="list-group">
-                    <text className="list-group-item border-0">
+                    <div className="list-group-item border-0">
                         <h4 className="d-inline">DISCUSSIONS FOR TOPIC</h4>
                         <button type="button" className="btn btn-primary float-right"
                                 onClick={() => {
                                     this.props.addingComment()
                                 }}
                         >Add Comment</button>
-                    </text>
+                    </div>
                 </div>
 
 
@@ -78,9 +78,9 @@ class ConversationsComponent extends React.Component{
                     </a>
                     }
                     {
-                        this.props.discussions.discussions && this.props.discussions.discussions.map(discussion =>
+                        this.props.discussions.discussions && this.props.discussions.discussions.map((discussion, index) =>
                             <a href="#"
-                               className="list-group-item list-group-item-action flex-column align-items-start">
+                               className="list-group-item list-group-item-action flex-column align-items-start" key={index}>
                                 <div className="d-flex w-100 justify-content-between">
                                     <h5 className="mb-1"> {discussion.title}</h5>
                                     <small>Today</small>

@@ -1,31 +1,33 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {save} from "../../services/EventService";
-import {findEventIdsForUser, profile, deleteEventForUser} from "../../services/UserService";
+import {profile} from "../../services/UserService";
+import {findEventIdsForUser, deleteEventForUser} from "../../services/EventService";
 
 export default class EventsSearchComponent extends React.Component{
 
     componentDidMount() {
-        this.props.courseName && this.searchEvents(this.props.courseName)
-        profile()
-            .then(profile => {
-                if(profile.status === 500) this.props.history.push("/")
-                else this.setState({
-                    user: profile
+
+        if(this.props.user){
+            this.props.courseName && this.searchEvents(this.props.courseName)
+            try {
+                this.setState({
+                    user: this.props.user
                 })
-            })
-            .then(r => findEventIdsForUser(this.state.user.id)
-                .then( events => {this.setState({
-                    userEventIds: events
-                })
-                })
-            )
+            } finally {
+                findEventIdsForUser(this.state.user.id)
+                    .then(events => {
+                        this.setState({
+                            userEventIds: events
+                        })
+                    })
+            }
+        }
 
 
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-
         if(prevProps.courseName !== this.props.courseName){
             this.props.courseName && this.searchEvents(this.props.courseName)
         }
@@ -38,15 +40,6 @@ export default class EventsSearchComponent extends React.Component{
                 events: result.events && result.events.event
             }))
     }
-
-    // getEventDetails = (keywords) => {
-    //     this.props.history.push(`/course-manager/course/${this.props.courseId}/event/search/${searchLocation}`)
-    //     fetch(`/api/event/search?location=${searchLocation}&date=Future&q=computer`)
-    //         .then(response => response.json())
-    //         .then(result => this.setState({
-    //             events: result.events && result.events.event
-    //         }))
-    // }
 
     save = (event) =>
         save(event)
@@ -94,7 +87,6 @@ export default class EventsSearchComponent extends React.Component{
                             <li className={`list-group-item`} key={i}>
                                 <Link to={`/course-manager/course/${this.props.courseId}/event/${event.id}`}>
                                     {event.title}
-                                    {console.log(event)}
                                 </Link>
                                 {this.state.userEventIds.includes(event.id)
                                     ? <button
@@ -109,14 +101,10 @@ export default class EventsSearchComponent extends React.Component{
                                         }}>
                                         Save
                                     </button>
-
                                 }
                                 <div>
                                     <small>Date: {event.start_time}</small>
                                 </div>
-
-
-
                             </li>
                             )
                             : <h3>LOADING...</h3>

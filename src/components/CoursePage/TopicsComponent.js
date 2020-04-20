@@ -15,17 +15,17 @@ class  TopicsComponent extends React.Component {
             <div className="col-3">
                 <div className="overflow-auto">
                     <div className="list-group list-group-flush">
-                        <text className="list-group-item">
+                        <div className="list-group-item">
                             <h4>CONVERSATION TOPICS</h4>
-                        </text>
+                        </div>
                         <Link to={`/course-manager/course/${this.props.courseId}/topic/events`}
                               className="list-group-item list-group-item-action">
                             Events
                         </Link>
                         {
-                            this.props.topics && this.props.topics.topics.map(topic =>
+                            this.props.topics && this.props.topics.topics.map((topic, index) =>
                                 <Link to={`/course-manager/course/${this.props.courseId}/topic/${topic.id}`}
-                                      className="list-group-item list-group-item-action">
+                                      className="list-group-item list-group-item-action" key={index}>
                                     {topic.title}
                                 </Link>
                             )

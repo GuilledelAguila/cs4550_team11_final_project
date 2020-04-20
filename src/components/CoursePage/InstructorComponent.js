@@ -8,14 +8,24 @@ import {profile} from "../../services/UserService";
 
 class InstructorComponent extends React.Component{
 
-    componentWillMount() {
-        profile()
-            .then(profile =>this.setState(prevState => ({
+    // componentWillMount() {
+    //     this.setState(prevState => ({
+    //             course: prevState.course,
+    //             editingBriefDescription: false,
+    //             user: this.props.user}))
+    //     this.findCourseById(this.props.courseId)
+    // }
+
+    componentDidMount() {
+        if(this.props.user){
+            this.setState(prevState => ({
                 course: prevState.course,
                 editingBriefDescription: false,
-                user: profile
-            })))
-        this.findCourseById(this.props.courseId)
+                user: this.props.user
+            }))
+
+            this.findCourseById(this.props.courseId)
+        }
     }
 
     findCourseById = (courseId) => {
@@ -72,7 +82,7 @@ class InstructorComponent extends React.Component{
                             </div>
                             <div className="col-2">
                                 {
-                                    this.state.user.userType === 'FACULTY' &&
+                                    this.props.user.userType === 'FACULTY' &&
                                         <div className="row">
                                             {
                                                 this.state.editingBriefDescription === false &&
@@ -90,7 +100,7 @@ class InstructorComponent extends React.Component{
 
                                             }
                                             {
-                                                this.state.user.userType === 'FACULTY' &&
+                                                this.props.user.userType === 'FACULTY' &&
                                                 <button className="btn-events">
                                                     <Link to={`/course-manager/course/${this.state.course.id}/postEvent`}>
                                                         Add Events

@@ -1,18 +1,20 @@
 
 export const logout = () =>
-    fetch(`http://localhost:8080/logout`, {
+    fetch(`http://localhost:8080/api/logout`, {
         method: 'POST',
         credentials: "include"
     })
 
 export const profile = () =>
-    fetch(`http://localhost:8080/profile`, {
+    fetch(`http://localhost:8080/api/profile`, {
         method: 'POST',
         credentials: "include"
-    }).then(response => response.json())
+    }).then(response => response.text()
+        .then((text) => text.length ? JSON.parse(text) : null)
+    )
 
 export const register = (user) =>
-    fetch(`http://localhost:8080/register`, {
+    fetch(`http://localhost:8080/api/register`, {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {
@@ -22,7 +24,7 @@ export const register = (user) =>
     }).then(response => response.json())
 
 export const login = (user) =>
-    fetch(`http://localhost:8080/login`, {
+    fetch(`http://localhost:8080/api/login`, {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {
@@ -41,41 +43,21 @@ export const login = (user) =>
     });
 
 export const findUsersToValidate = () =>
-    fetch(`http://localhost:8080/users/faculty/validate`).then(response => response.json())
+    fetch(`http://localhost:8080/api/users/faculty/validate`).then(response => response.json())
 
 export const updateValidateFaculty = (userId) =>
-    fetch(`http://localhost:8080/users/faculty/validate/${userId}`, {
+    fetch(`http://localhost:8080/api/users/faculty/validate/${userId}`, {
         method: 'PUT',
         credentials: "include"
     })
 
 export const updateUnvalidateFaculty = (userId) =>
-    fetch(`http://localhost:8080/users/faculty/unvalidate/${userId}`, {
+    fetch(`http://localhost:8080/api/users/faculty/unvalidate/${userId}`, {
         method: 'PUT',
         credentials: "include"
     })
 
-export const findEventsForUser = () =>
-    fetch(`http://localhost:8080/users/events/`, {
-        method: 'GET',
-        credentials: "include"
-    }).then(response => response.json())
 
-export const findEventIdsForUser = () =>
-    fetch(`http://localhost:8080/users/events/ids`, {
-        method: 'GET',
-        credentials: "include"
-    }).then(response => response.json())
-
-export const deleteEventForUser = (event) =>
-    fetch(`http://localhost:8080/users/events/`, {
-        method: 'DELETE',
-        body: JSON.stringify(event),
-        headers: {
-            'content-type': 'application/json'
-        },
-        credentials: "include"
-    }).then(response => response.json())
 
 
 

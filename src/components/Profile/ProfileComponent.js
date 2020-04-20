@@ -1,10 +1,10 @@
 import React from "react";
-import {profile, logout, deleteEventForUser} from "../../services/UserService";
+import {profile, logout} from "../../services/UserService";
 import {setUser} from "../../actions/userActions";
 import {connect} from "react-redux";
 
 import {Link} from "react-router-dom";
-import {findEventsForUser} from "../../services/UserService";
+import {findEventsForUser, deleteEventForUser} from "../../services/EventService";
 
 
 class ProfileComponent extends React.Component {
@@ -16,19 +16,16 @@ class ProfileComponent extends React.Component {
 
     componentDidMount() {
         profile()
-            .then(profile => this.props.setUser(profile))
-        findEventsForUser()
-            .then(events => this.setState({
-                events: events,
-                eventIds: events.map(event => event.id)
-            }))
-
-
-    }
-
-    refresh = () => {
-        logout()
-            .then(status => this.props.history.push("/login"))
+            .then(profile => profile
+                ? (this.props.setUser(profile),
+                    findEventsForUser()
+                        .then(events => this.setState({
+                            events: events,
+                            eventIds: events.map(event => event.id)
+                        }))
+                    )
+                : this.props.history.push("/")
+            )
     }
 
     delete = (event) =>

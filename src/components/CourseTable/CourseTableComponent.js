@@ -1,6 +1,5 @@
 import React from "react";
 import CourseRowComponent from "./CourseRowComponent";
-import {findAllTopics} from "../../actions/topicActions";
 import {connect} from "react-redux";
 import courseService from '../../services/CourseService'
 import {findAllCourses} from '../../actions/courseActions'
@@ -18,7 +17,7 @@ class CourseTableComponent extends React.Component {
                 {
                     this.props.courses && this.props.courses.map(function(course, index){
                         return (
-                            <CourseRowComponent
+                            <CourseRowComponent key={index}
                                 course={course}
                                 index={index}
                             />
