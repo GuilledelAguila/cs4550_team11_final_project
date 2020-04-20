@@ -1,10 +1,20 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {save} from "../../services/EventService";
+import eventService, {save} from "../../services/EventService";
 import {profile} from "../../services/UserService";
 import {findEventIdsForUser, deleteEventForUser} from "../../services/EventService";
+import {
+    addComment,
+    cancelComment,
+    findAllDiscussionsForTopic,
+    saveComment,
+    updateDiscussion
+} from "../../actions/discussionActions";
+import discussionService from "../../services/DiscussionService";
+import {connect} from "react-redux";
+import {findEvents} from "../../actions/eventActions";
 
-export default class EventsSearchComponent extends React.Component{
+class EventsSearchComponent extends React.Component{
 
     state = {
         events: [],
@@ -13,7 +23,12 @@ export default class EventsSearchComponent extends React.Component{
         user: {}
     }
 
+
     componentDidMount() {
+
+        this.props.findEventsForCourse(this.props.courseId);
+
+
         if(this.props.user){
             this.props.courseName && this.searchEvents(this.props.courseName) &&
                 this.setState({
@@ -73,6 +88,25 @@ export default class EventsSearchComponent extends React.Component{
                 {/*    Search For Events*/}
                 {/*</button>*/}
                 <ul className={`list-group`}>
+                    <li className={`list-group-item background-brown white`} key="instructorTitle">
+                        <h4>Events posted by instructor</h4>
+                    </li>
+                    {
+                        this.props.instructorEvents && this.props.instructorEvents.map((iEvent, index) =>
+                        <li className={"list-group-item"}>
+                            <Link to={`/course-manager/course/${this.props.courseId}/topic/event/${iEvent.id}`}>
+                            <label>{iEvent.title}</label>
+                            </Link>
+                        </li>
+                        )
+                    }
+                    {
+                        this.props.instructorEvents.length === 0 &&
+                            <li className={"list-group-item"}>
+                                <h4>No events posted by your instructor yet</h4>
+                            </li>
+
+                    }
                     <li className={`list-group-item background-brown white`} key="title">
                         <h4>Events related to {this.props.courseName}</h4>
                     </li>
@@ -81,7 +115,7 @@ export default class EventsSearchComponent extends React.Component{
 
                             ? this.state.events.map((event, i) =>
                             <li className={`list-group-item`} key={i}>
-                                <Link to={`/course-manager/course/${this.props.courseId}/event/${event.id}`}>
+                                <Link to={`/course-manager/course/${this.props.courseId}/topic/event/${event.id}`}>
                                     {event.title}
                                 </Link>
                                 {this.state.userEventIds.includes(event.id)
@@ -115,5 +149,25 @@ export default class EventsSearchComponent extends React.Component{
             </div>
         )
     }
-
 }
+
+const stateToPropertyMapper = (state) => {
+    console.log(state.events.events)
+    return {
+        instructorEvents: state.events.events
+    }
+}
+
+const dispatchToPropertyMapper = (dispatch) => {
+    return {
+        findEventsForCourse: (courseId) => {
+            eventService.findEventsForCourse(courseId)
+                .then(actualEvents =>  dispatch(findEvents(actualEvents)))
+        }
+    }
+}
+
+export default connect(
+    stateToPropertyMapper,
+    dispatchToPropertyMapper)
+(EventsSearchComponent)
