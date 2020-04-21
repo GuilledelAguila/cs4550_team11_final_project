@@ -62,7 +62,7 @@ class EventsSearchComponent extends React.Component{
 
     searchEvents = (keywords) => {
         if(this.state.keywords !== '') this.props.history.push(`/course-manager/course/${this.props.courseId}/topic/events/search/${this.state.keywords}`);
-        fetch(`/api/event/search?keywords=${keywords}`)
+        fetch(`https://wbdv-sp20-guille-server-node.herokuapp.com/api/event/search?keywords=${keywords}`)
             .then(response => response.json())
             .then(result => {
                 this.setState({

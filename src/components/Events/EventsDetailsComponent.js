@@ -10,7 +10,7 @@ export default class EventsDetailsComponent extends React.Component {
         eventService.findEventById(eventID)
             .then(response => {
                 if(response === "ERROR" || response.owner !== "INSTRUCTOR"){
-                    fetch(`/api/searchbyid?id=${eventID}`)
+                    fetch(`https://wbdv-sp20-guille-server-node.herokuapp.com/api/searchbyid?id=${eventID}`)
                         .then(response => response.json())
                         .then(result => this.setState({
                             event: result,
