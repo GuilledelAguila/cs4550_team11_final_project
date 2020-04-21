@@ -29,7 +29,7 @@
     "eject": "react-scripts eject",
     "server": "node-env-run server --exec nodemon",
     "start": "run server",
-    "heroku-postbuild": "npm start-react"
+    "heroku-postbuild": "npm install && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
