@@ -9,7 +9,6 @@ app.use(pino);
 
 app.get('/api/event/search', (req, res) => {
     let keywords = req.query.keywords;
-    console.log(keywords)
     keywords = keywords.replace(/ /g, "+%7C%7C+");
     res.setHeader('Content-Type', 'application/json');
     request(

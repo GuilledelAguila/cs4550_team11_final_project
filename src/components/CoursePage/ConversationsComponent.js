@@ -12,8 +12,11 @@ import discussionService  from "../../services/DiscussionService";
 class ConversationsComponent extends React.Component{
 
     state = {
-        body:"",
-        title: "",
+        comment: {
+            body: "",
+            title: "",
+        },
+        users: [{}]
     }
 
     componentDidMount() {
@@ -52,7 +55,10 @@ class ConversationsComponent extends React.Component{
                                        onChange={(e) => {
                                            const newText = String(e.target.value);
                                            this.setState(prevState => ({
-                                               title: newText
+                                               comment: {
+                                                   body: prevState.comment.body,
+                                                   title: newText
+                                               }
                                            }))
                                        }
                                        }/>
@@ -63,7 +69,10 @@ class ConversationsComponent extends React.Component{
                                           onChange={(e) => {
                                               const newText = String(e.target.value);
                                               this.setState(prevState => ({
-                                                  body: newText
+                                                  comment: {
+                                                      title: prevState.comment.title,
+                                                      body: newText
+                                                  }
                                               }))
                                           }
                                           }/>
@@ -71,7 +80,7 @@ class ConversationsComponent extends React.Component{
                         </form>
                         <button type="button" className="btn btn-success"
                                 onClick={() => {
-                                    this.props.saveComment(this.props.topicId, this.state)
+                                    this.props.saveComment(this.props.topicId, this.state.comment)
                                 }}>Save</button>
                         <button type="button" className="btn btn-danger"
                                 onClick={this.props.cancelComment}>Cancel</button>
@@ -83,10 +92,10 @@ class ConversationsComponent extends React.Component{
                                className="list-group-item list-group-item-action flex-column align-items-start" key={index}>
                                 <div className="d-flex w-100 justify-content-between">
                                     <h5 className="mb-1"> {discussion.title}</h5>
-                                    <small>Today</small>
+                                    <small>On {discussion && discussion.date.replace(/T/g, " ")}</small>
                                 </div>
                                 <p className="mb-1">{discussion.body}</p>
-                                {/*<small>By {discussion.user}</small>*/}
+                                <small>By {discussion && discussion.user ? discussion.user.name : null}</small>
                             </a>
                         )
                     }

@@ -6,7 +6,14 @@ export const createDiscussion = (topicId, discussion) =>
         body: JSON.stringify(discussion),
         headers: {
             'content-type': 'application/json'
-        }
+        },
+        credentials: "include"
+    })
+        .then(response => response.json())
+
+export const findUsersForTopic = (topicId) =>
+    fetch(`http://localhost:8080/api/topics/${topicId}/users`, {
+        method: 'POST',
     })
         .then(response => response.json())
 
@@ -27,5 +34,6 @@ export const findDiscussionsForTopic = (topicId) => {
 
 export default {
     createDiscussion,
-    findDiscussionsForTopic
+    findDiscussionsForTopic,
+    findUsersForTopic
 }
