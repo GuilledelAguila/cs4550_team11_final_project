@@ -18,9 +18,10 @@ class EventsSearchComponent extends React.Component{
 
     state = {
         events: [],
-        searchLocation: '',
+        keywords: '',
         userEventIds: [],
-        user: {}
+        user: {},
+        status: "LOADING"
     }
 
 
@@ -60,11 +61,14 @@ class EventsSearchComponent extends React.Component{
     }
 
     searchEvents = (keywords) => {
+        if(this.state.keywords !== '') this.props.history.push(`/course-manager/course/${this.props.courseId}/topic/events/search/${this.state.keywords}`);
         fetch(`/api/event/search?keywords=${keywords}`)
             .then(response => response.json())
-            .then(result => this.setState({
-                events: result.events && result.events.event
-            }))
+            .then(result => {
+                this.setState({
+                    events: result.events && result.events.event,
+                })
+            })
     }
 
     save = (event) =>
@@ -132,14 +136,26 @@ class EventsSearchComponent extends React.Component{
 
                     }
                     <li className={`list-group-item background-brown white`} key="title">
-                        <h4>Events related to {this.props.courseName}</h4>
+                        <div className="form-inline">
+                            <h4>Other Events</h4>
+                        <div className="form-group">
+                            <input className="form-control search-input" placeholder="Search keywords"
+                                   onChange={e => this.setState({keywords: e.target.value})}
+                                   value={this.state.keywords}
+                            />
+                        </div>
+                            <button className="btn btn-success search-btn "
+                                    onClick={() => this.searchEvents(this.state.keywords)}>
+                                Search Events
+                            </button>
+                        </div>
                     </li>
                     {
                         this.state.events && this.state.events.length !== 0
 
                             ? this.state.events.map((event, i) =>
                             <li className={`list-group-item`} key={event.id}>
-                                <Link to={`/course-manager/course/${this.props.courseId}/topic/event/${event.id}`}>
+                                <Link to={`/course-manager/course/${this.props.courseId}/topic/event/details/${event.id}`}>
                                     {event.title}
                                 </Link>
                                 {
@@ -167,7 +183,7 @@ class EventsSearchComponent extends React.Component{
 
                     {
                         !this.state.events && <h4>
-                            Ooops no events found in {this.props.match.params.searchLocation} :(
+                            Ooops no events found in {this.state.keywords} :(
                         </h4>
                     }
                 </ul>

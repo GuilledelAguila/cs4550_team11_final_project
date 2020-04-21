@@ -103,10 +103,20 @@ class HomePageContainer extends React.Component {
                                topicId={props.match.params.topicId}
                            />
                        }/>
+                <Route path="/course-manager/course/:courseId/topic/:topicId/search/:keywords"
+                       exact={true}
+                       render={(props) =>
+                           <CoursePageComponent
+                               {...props}
+                               courseId={props.match.params.courseId}
+                               topicId={props.match.params.topicId}
+                               keywords={props.match.params.keywords}
+                           />
+                       }/>
 
 
                 <Route
-                    path={`/course-manager/course/:courseId/topic/event/:eventId`}
+                    path={`/course-manager/course/:courseId/topic/event/details/:eventId`}
                     exact={true}
                     component={EventDetailsComponent}/>
 

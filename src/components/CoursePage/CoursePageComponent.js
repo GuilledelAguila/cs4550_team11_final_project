@@ -53,6 +53,7 @@ class CoursePageComponent extends React.Component{
                                             topicId={this.props.topicId}/>
 
                                         : <EventsSearchComponent
+                                            {...this.props}
                                             user={this.props.user}
                                             courseName={this.state.courseName}
                                             courseId={this.props.courseId}/>
