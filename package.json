@@ -23,14 +23,13 @@
   },
   "proxy": "http://localhost:5000",
   "scripts": {
-    "start-react": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "node-env-run server --exec nodemon",
-    "start": "node-env-run server --exec nodemon ",
-    "heroku-postbuild": "run-p start-react"
-  },
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+},
   "eslintConfig": {
     "extends": "react-app"
   },
