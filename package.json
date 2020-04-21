@@ -31,9 +31,9 @@
     "client-install": "npm install",
     "client": "npm start-react",
     "start-react": "react-scripts start",
-    "start": "node server",
+
     "server": "node-env-run server --exec nodemon",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild":      "NPM_CONFIG_PRODUCTION=false npm install && npm run build "
 },
   "eslintConfig": {
