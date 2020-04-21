@@ -28,8 +28,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node-env-run server --exec nodemon",
-    "start": "node-env-run server --exec nodemon && run start-react ",
-    "heroku-postbuild": "npm install && npm run build"
+    "start": "node-env-run server --exec nodemon ",
+    "heroku-postbuild": "run-p start-react"
   },
   "eslintConfig": {
     "extends": "react-app"
