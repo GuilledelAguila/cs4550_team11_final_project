@@ -95,7 +95,7 @@ class PostEventComponent extends React.Component {
                    </div>
                    <div className="form-group row">
                        <label className="col-sm-2">
-                           Desription
+                           Description
                        </label>
                        <div className="col-sm-10">
                            <input

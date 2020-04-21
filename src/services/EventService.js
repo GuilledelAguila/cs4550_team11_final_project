@@ -1,18 +1,19 @@
+import {API_URL} from "../constants";
 
 export const findEventsForUser = () =>
-    fetch(`http://localhost:8080/api/users/events/`, {
+    fetch(`${API_URL}/api/users/events/`, {
         method: 'GET',
         credentials: "include"
     }).then(response => response.json())
 
 export const findEventIdsForUser = () =>
-    fetch(`http://localhost:8080/api/users/events/ids`, {
+    fetch(`${API_URL}/api/users/events/ids`, {
         method: 'GET',
         credentials: "include"
     }).then(response => response.json())
 
 export const deleteEventForUser = (event) =>
-    fetch(`http://localhost:8080/api/users/events/`, {
+    fetch(`${API_URL}/api/users/events/`, {
         method: 'DELETE',
         body: JSON.stringify(event),
         headers: {
@@ -22,7 +23,7 @@ export const deleteEventForUser = (event) =>
     }).then(response => response.json())
 
 export const save = (event) =>
-    fetch(`http://localhost:8080/api/users/events/`, {
+    fetch(`${API_URL}/api/users/events/`, {
         method: 'POST',
         body: JSON.stringify(event),
         headers: {
@@ -33,7 +34,7 @@ export const save = (event) =>
 
 
 export const postEventForCourse = (event, courseId) =>
-    fetch(`http://localhost:8080/api/courses/${courseId}/events`, {
+    fetch(`${API_URL}/api/courses/${courseId}/events`, {
         method: 'POST',
         body: JSON.stringify(event),
         headers: {
@@ -43,13 +44,13 @@ export const postEventForCourse = (event, courseId) =>
     }).then(response => response.json())
 
 export const findEventsForCourse = (courseId) => {
-    return fetch(`http://localhost:8080/api/courses/${courseId}/events`)
+    return fetch(`${API_URL}/api/courses/${courseId}/events`)
         .then(response => response.json())
 }
 
 export const findEventById = (eventId) => {
 
-    return fetch(`http://localhost:8080/api/events/${eventId}`)
+    return fetch(`${API_URL}/api/events/${eventId}`)
         .then(function(response) {
             if (!response.ok) {
                 throw Error(response.statusText);
