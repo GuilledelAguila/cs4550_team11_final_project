@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import eventService from "../../services/EventService"
+import {searchEventDetails} from "../../services/ApiService";
 
 
 export default class EventsDetailsComponent extends React.Component {
@@ -10,8 +11,7 @@ export default class EventsDetailsComponent extends React.Component {
         eventService.findEventById(eventID)
             .then(response => {
                 if(response === "ERROR" || response.owner !== "INSTRUCTOR"){
-                    fetch(`https://wbdv-sp20-guille-server-node.herokuapp.com/api/searchbyid?id=${eventID}`)
-                        .then(response => response.json())
+                    searchEventDetails(eventID)
                         .then(result => this.setState({
                             event: result,
                             images: result.images,

@@ -3,18 +3,9 @@ import "./CoursePage.style.client.css"
 import icon from "./default-icon.jpg"
 import courseService from "../../services/CourseService";
 import {Link} from "react-router-dom";
-import {profile} from "../../services/UserService";
 
 
 class InstructorComponent extends React.Component{
-
-    // componentWillMount() {
-    //     this.setState(prevState => ({
-    //             course: prevState.course,
-    //             editingBriefDescription: false,
-    //             user: this.props.user}))
-    //     this.findCourseById(this.props.courseId)
-    // }
 
     componentDidMount() {
         if(this.props.user){

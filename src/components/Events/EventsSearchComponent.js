@@ -1,16 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import eventService, {save} from "../../services/EventService";
-import {profile} from "../../services/UserService";
+import {searchEvents} from "../../services/ApiService";
 import {findEventIdsForUser, deleteEventForUser} from "../../services/EventService";
-import {
-    addComment,
-    cancelComment,
-    findAllDiscussionsForTopic,
-    saveComment,
-    updateDiscussion
-} from "../../actions/discussionActions";
-import discussionService from "../../services/DiscussionService";
 import {connect} from "react-redux";
 import {findEvents} from "../../actions/eventActions";
 
@@ -20,19 +12,12 @@ class EventsSearchComponent extends React.Component{
         events: [],
         keywords: '',
         userEventIds: [],
-        user: {},
-        status: "LOADING"
     }
 
 
     componentDidMount() {
-
         this.props.findEventsForCourse(this.props.courseId);
         if(this.props.user.id){
-            this.props.courseName && this.searchEvents(this.props.courseName) &&
-                this.setState({
-                    user: this.props.user
-                })
             findEventIdsForUser(this.props.user)
                     .then(events => {
                         this.setState({
@@ -43,32 +28,19 @@ class EventsSearchComponent extends React.Component{
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.courseName !== this.props.courseName){
-            this.props.courseName && this.searchEvents(this.props.courseName)
-            if(this.props.user.id){
-                this.props.courseName && this.searchEvents(this.props.courseName) &&
-                this.setState({
-                    user: this.props.user
-                })
-                findEventIdsForUser(this.props.user)
-                    .then(events => {
-                        this.setState({
-                            userEventIds: events
-                        })
-                    })
-            }
+        if(prevProps.courseName !== this.props.courseName) {
+            this.searchEvents(this.props.courseName)
         }
     }
 
     searchEvents = (keywords) => {
-        if(this.state.keywords !== '') this.props.history.push(`/course-manager/course/${this.props.courseId}/topic/events/search/${this.state.keywords}`);
-        fetch(`https://wbdv-sp20-guille-server-node.herokuapp.com/api/event/search?keywords=${keywords}`)
-            .then(response => response.json())
-            .then(result => {
-                this.setState({
-                    events: result.events && result.events.event,
-                })
-            })
+        this.props.history.push(`/course-manager/course/${this.props.courseId}/topic/events/search/${keywords}`);
+            searchEvents(keywords)
+                .then(result =>
+                    this.setState({
+                        events: result.events && result.events.event,
+                    })
+                )
     }
 
     save = (event) =>
@@ -98,7 +70,7 @@ class EventsSearchComponent extends React.Component{
                     {
                         this.props.instructorEvents && this.props.instructorEvents.map((iEvent, index) =>
                         <li className={"list-group-item"} key={iEvent.id}>
-                            <Link to={`/course-manager/course/${this.props.courseId}/topic/event/${iEvent.id}`}>
+                            <Link to={`/course-manager/course/${this.props.courseId}/topic/event/details/${iEvent.id}`}>
                             <label>{iEvent.title}</label>
                             </Link>
 

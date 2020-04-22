@@ -82,6 +82,7 @@ class PostEventComponent extends React.Component {
                        </label>
                        <div className="col-sm-10">
                            <input
+                               type={"date"}
                                className="form-control"
                                placeholder="Monday, April 10"
                                value={this.state.start_time}
