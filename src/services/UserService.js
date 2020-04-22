@@ -54,3 +54,13 @@ export const updateUnvalidateFaculty = (userId) =>
 export const findUserById = (userId) =>
     fetch(`${API_URL}/api/users/${userId}`).then(response => response.json())
 
+export const saveNewUserDetails = (user) =>
+    fetch(`${API_URL}/api/users/save`, {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: "include"
+    }).then(response => response.json())
+

@@ -1,5 +1,5 @@
 import React from "react";
-import {profile, findUserById} from "../../services/UserService";
+import {profile, findUserById, saveNewUserDetails} from "../../services/UserService";
 import {setUser} from "../../actions/userActions";
 import {connect} from "react-redux";
 
@@ -12,7 +12,8 @@ class ProfileComponent extends React.Component {
     state ={
         events: [],
         eventIds: [],
-        user: {}
+        user: {},
+        editingDetails: false,
     };
 
     componentDidMount() {
@@ -23,6 +24,9 @@ class ProfileComponent extends React.Component {
             profile()
                 .then(profile => profile
                     ? (this.props.setUser(profile),
+                            this.setState({
+                                user: profile
+                            }),
                             findEventsForUser()
                                 .then(events => this.setState({
                                     events: events,
@@ -44,6 +48,24 @@ class ProfileComponent extends React.Component {
                 }))
             )
 
+    editDetails = () => {
+        this.setState(prevState => ({
+            editingDetails: true,
+        }))
+    }
+
+    saveNewUserDetails = (user) => {
+        saveNewUserDetails(user)
+            .then(updatedUser => {
+                this.props.setUser(updatedUser)
+                    this.setState({
+                        user: updatedUser,
+                        editingDetails: false,
+                    })
+            })
+    }
+
+
     render() {
         return(
             <div>
@@ -58,12 +80,77 @@ class ProfileComponent extends React.Component {
                     {!this.props.userId
                         ? <ul className="list-group">
                             <li className="list-group-item background-brown white" key="aa">
-                                <h4>Your details:</h4>
+                                <h4>
+                                {this.state.editingDetails === false
+                                    ? <button className="btn hidden wbdv-row wbdv-button wbdv-edit"
+                                              onClick={this.editDetails}>
+                                        <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit white"/>
+                                    </button>
+                                    : <button className="btn wbdv-row wbdv-button wbdv-save white"
+                                              onClick={()=> this.saveNewUserDetails(this.state.user)}>
+                                        <i className="fas fa-check white"/>
+                                    </button>
+                                } Your details:</h4>
                             </li>
-                            <li className="list-group-item" key={1}>Name: {this.props.user.name}</li>
-                            <li className="list-group-item" key={2}>Last name: {this.props.user.lastName}</li>
+                            <li className="list-group-item form-inline" key={1}>
+                                {this.state.editingDetails === false
+                                    ? <span>Name: {this.props.user.name}</span>
+                                    : <input className="form-control"
+                                              onChange={(e) => {
+                                                  const newName = String(e.target.value);
+                                                  this.setState(prevState => ({
+                                                      user: {
+                                                          id: prevState.user.id,
+                                                          email: prevState.user.email,
+                                                          lastName: prevState.user.lastName,
+                                                          name: newName}
+                                                  }))
+                                              }}
+                                              value={this.state.user.name}>
+
+                                    </input>
+                                }
+                            </li>
+                            <li className="list-group-item form-inline" key={2}>
+                                {this.state.editingDetails === false
+                                    ? <span>Name: {this.props.user.lastName}</span>
+                                    : <input className="form-control"
+                                             onChange={(e) => {
+                                                 const lastName = String(e.target.value);
+                                                 this.setState(prevState => ({
+                                                     user: {
+                                                         id: prevState.user.id,
+                                                         email: prevState.user.email,
+                                                         lastName: lastName,
+                                                         name: prevState.user.name}
+                                                 }))
+                                             }}
+                                             value={this.state.user.lastName}>
+
+                                    </input>
+                                }
+
+                            </li>
                             <li className="list-group-item" key={3}>Type: {this.props.user.userType}</li>
-                            <li className="list-group-item" key={4}>Email: {this.props.user.email}</li>
+                            <li className="list-group-item form-inline" key={4}>
+                                {this.state.editingDetails === false
+                                    ? <span>Name: {this.props.user.email}</span>
+                                    : <input className="form-control"
+                                             onChange={(e) => {
+                                                 const email = String(e.target.value);
+                                                 this.setState(prevState => ({
+                                                     user: {
+                                                         id: prevState.user.id,
+                                                         email: email,
+                                                         lastName: prevState.user.lastName,
+                                                         name: prevState.user.name}
+                                                 }))
+                                             }}
+                                             value={this.state.user.email}>
+
+                                    </input>
+                                }
+                            </li>
                             <li className="list-group-item background-brown white" key="events">
                                 <h4>Your Events:</h4>
                             </li>
@@ -108,7 +195,7 @@ const stateToPropertyMapper = (state) => {
 }
 const dispatchToPropertyMapper = (dispatch) => {
     return {
-        setUser: (user) => dispatch(setUser(user)),
+        setUser: (user) => dispatch(setUser(user))
     }
 }
 
