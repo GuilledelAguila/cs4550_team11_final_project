@@ -51,5 +51,6 @@ export const updateUnvalidateFaculty = (userId) =>
         credentials: "include"
     })
 
-
+export const findUserById = (userId) =>
+    fetch(`${API_URL}/api/users/${userId}`).then(response => response.json())
 

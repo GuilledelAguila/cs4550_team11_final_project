@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 import {
     addComment,
     cancelComment,
@@ -95,7 +96,10 @@ class ConversationsComponent extends React.Component{
                                     <small>On {discussion && discussion.date.replace(/T/g, " ")}</small>
                                 </div>
                                 <p className="mb-1">{discussion.body}</p>
-                                <small>By {discussion && discussion.user ? discussion.user.name : null}</small>
+                                <Link to={`/profile/${discussion && discussion.user ? discussion.user.id : null}`}>
+                                    <small>By {discussion && discussion.user ? discussion.user.name : null}</small>
+                                </Link>
+
                             </a>
                         )
                     }

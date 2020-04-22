@@ -63,11 +63,12 @@ class HomePageContainer extends React.Component {
                                {...props}
                            />
                        }/>
-                <Route path="/profile"
+                <Route path={["/profile","/profile/:userId"]}
                        exact={true}
                        render={(props) =>
                            <ProfileComponent
                                {...props}
+                               userId = {props.match.params.userId}
                            />
                        }/>
 
@@ -116,7 +117,7 @@ class HomePageContainer extends React.Component {
 
 
                 <Route
-                    path={`/course-manager/course/:courseId/topic/event/details/:eventId`}
+                    path={[`/course-manager/course/:courseId/topic/event/details/:eventId`,`/course-manager/profile/event/details/:eventId` ]}
                     exact={true}
                     component={EventDetailsComponent}/>
 
@@ -129,6 +130,7 @@ class HomePageContainer extends React.Component {
                             courseId={props.match.params.courseId}
                         />
                     }/>
+
             </Router>
             </Provider>
         )

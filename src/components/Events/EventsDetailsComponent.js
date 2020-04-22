@@ -35,9 +35,16 @@ export default class EventsDetailsComponent extends React.Component {
             <div>
                 <div className="container-fluid">
                     <h1>
-                        <Link to={`/course-manager/course/${this.props.match.params.courseId}/topic/events`}>
-                            <button className="btn btn-primary h1 float-left">Back</button>
-                        </Link>
+                        {this.props.match.params.courseId
+                            ? <Link to={`/course-manager/course/${this.props.match.params.courseId}/topic/events`}>
+                                <button className="btn btn-primary h1 float-left">Back</button>
+                            </Link>
+
+                            :<Link to={`/profile`}>
+                                <button className="btn btn-primary h1 float-left">Back</button>
+                            </Link>
+
+                        }
                         Event Details:
                     </h1>
                 </div>
