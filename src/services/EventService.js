@@ -22,6 +22,12 @@ export const deleteEventForUser = (event) =>
         credentials: "include"
     }).then(response => response.json())
 
+export const deleteEvent = (eventId) =>
+    fetch(`${API_URL}/api/events/${eventId}`, {
+        method: 'DELETE',
+        credentials: "include"
+    })
+
 export const save = (event) =>
     fetch(`${API_URL}/api/users/events/`, {
         method: 'POST',

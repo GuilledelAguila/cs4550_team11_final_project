@@ -1,11 +1,8 @@
 import React from "react";
 import "./Events.style.client.css"
-import eventService from "../../services/EventService"
+import eventService, {deleteEvent} from "../../services/EventService"
 import {connect} from "react-redux";
-import discussionService from "../../services/DiscussionService";
-import {saveComment} from "../../actions/discussionActions";
 import {addEvent, findEvents} from "../../actions/eventActions";
-import CourseRowComponent from "../CourseTable/CourseRowComponent";
 import {Link} from "react-router-dom";
 
 class PostEventComponent extends React.Component {
@@ -31,6 +28,10 @@ class PostEventComponent extends React.Component {
             description: ''
         })
     }
+
+    delete = (eventId) =>
+        deleteEvent(eventId)
+            .then(eventIds => this.props.findEventsForCourse(this.props.courseId))
 
     render() {
         return (
@@ -128,7 +129,16 @@ class PostEventComponent extends React.Component {
                    {
                        this.props.events && this.props.events.map(event =>
                            <div className="list-group">
-                               <li className={"list-group-item"} key={event.title}>{event.title}</li>
+                               <li className={"list-group-item"} key={event.title}>
+                                   {event.title}
+                                   <button
+                                       className="btn btn-danger float-right"
+                                           onClick={() =>{ this.delete(event.id)
+                                           }}>
+                                       Remove
+                                   </button>
+                               </li>
+
                            </div>
                        )
                    }

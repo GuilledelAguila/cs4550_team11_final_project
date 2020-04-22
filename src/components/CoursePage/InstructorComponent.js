@@ -94,7 +94,7 @@ class InstructorComponent extends React.Component{
                                                 this.props.user.userType === 'FACULTY' &&
                                                 <button className="btn-events">
                                                     <Link to={`/course-manager/course/${this.state.course.id}/postEvent`}>
-                                                        Add Events
+                                                        Add/Remove Events
                                                     </Link>
                                                 </button>
                                             }
