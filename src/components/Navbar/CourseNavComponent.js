@@ -13,8 +13,10 @@ class CourseNavComponent extends React.Component {
         courseId: ""
     }
 
-    logout = () => logout()
-        .then(status => this.props.history.push("/"))
+    logout = () =>
+        logout()
+            .then(status => this.props.setUser())
+                .then(status => this.props.history.push("/"))
 
 
     render() {
@@ -24,6 +26,9 @@ class CourseNavComponent extends React.Component {
                     <div className="col-3">
                         <div className="row">
                             <div className="col-2">
+                                <Link to={`/`} >
+                                    <i className="fas fa-home white fa-2x"></i>
+                                </Link>
                             </div>
                             <div className="collapse navbar-collapse col-10">
                                 <label className="wbdv-label wbdv-course-manager">
